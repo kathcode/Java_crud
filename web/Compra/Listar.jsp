@@ -1,9 +1,3 @@
-<%-- 
-    Document   : Listar
-    Created on : Oct 17, 2017, 7:04:42 PM
-    Author     : esneiderserna
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

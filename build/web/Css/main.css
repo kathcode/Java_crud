@@ -1,0 +1,34 @@
+
+body{
+    color:#222;
+}
+
+.box-login{
+    padding-top:5em;
+}
+
+.site_title i{
+    display: inline-block;
+    min-width: 35px;
+    min-height: 35px;
+    text-align: center;
+}
+
+.nav-sm .navbar.nav_title a i{
+    min-width: 40px;
+    min-height: 40px;
+}
+
+.ver-info{
+    font-size: 16px;
+}
+
+.ver-info div{
+    padding: 8px 0;
+    border-bottom: 1px solid #c3c3c3;
+}
+
+.ver-info div span{
+    font-weight: 700;
+}
+
