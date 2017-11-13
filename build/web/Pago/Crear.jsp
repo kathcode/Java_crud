@@ -28,9 +28,9 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="col-lg-6">
-                                <form action="../Franquicia" method="post">
+                                <form action="../Pago?opcion=buscarPago" method="post">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="IdFranquicia" placeholder="Numero de tarjeta">
+                                        <input type="text" class="form-control" name="numero_tarjeta" placeholder="Numero de tarjeta">
                                         <span class="input-group-btn">
                                             <button class="btn btn-default" type="submit" name="search">Buscar tarjeta a pagar</button>
                                         </span>

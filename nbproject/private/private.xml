@@ -3,13 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/src/java/Controller/ControllerFranquicia.java</file>
-            <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/src/java/DAO/DAOFranquicia.java</file>
-            <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/web/Franquicia/verFranquicia.jsp</file>
-            <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/web/Franquicia/editarFranquicia.jsp</file>
-            <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/test/Controller/ControllerFranquiciaTest.java</file>
-            <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/web/Franquicia/crearFranquicia.jsp</file>
-            <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/src/java/Model/ModelFranquicias.java</file>
+            <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/web/Pago/Crear.jsp</file>
+            <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/web/Compra/Proyeccion.jsp</file>
+            <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/web/Shared/SideBar.jsp</file>
+            <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/web/Compra/Crear.jsp</file>
+            <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/web/Compra/Listar.jsp</file>
             <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/web/Franquicia/listarFranquicia.jsp</file>
         </group>
     </open-files>
