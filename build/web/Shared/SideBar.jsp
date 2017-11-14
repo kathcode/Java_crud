@@ -36,10 +36,8 @@
                     
                     <li><a><i class="fa fa-shopping-bag"></i>Compras<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="index.html">Nuevo compra</a></li>
-                            <li><a href="index2.html">Lista compras</a></li>                            
-                            <li><a href="index2.html">Generar proyección</a></li>
-
+                            <li><a href="/PPI-Proyecto-Bato/Compra/Crear.jsp">Nuevo compra</a></li>
+                            <li><a href="/PPI-Proyecto-Bato/Compra/Listar.jsp">Lista compras</a></li>                            
                         </ul>
                     </li>
                     

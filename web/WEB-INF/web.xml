@@ -17,12 +17,12 @@
         <servlet-class>Controller.ControllerFranquicia</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ControllerCompra</servlet-name>
-        <servlet-class>Controller.ControllerCompra</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ControllerPago</servlet-name>
         <servlet-class>Controller.ControllerPago</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControllerCompra</servlet-name>
+        <servlet-class>Controller.ControllerCompra</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ControllerUsuario</servlet-name>
@@ -41,12 +41,12 @@
         <url-pattern>/Franquicia</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ControllerCompra</servlet-name>
-        <url-pattern>/Compra</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ControllerPago</servlet-name>
         <url-pattern>/Pago</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerCompra</servlet-name>
+        <url-pattern>/Compra</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
