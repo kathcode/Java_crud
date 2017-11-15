@@ -32,3 +32,35 @@ body{
     font-weight: 700;
 }
 
+.btn{
+    font-size: 18px;
+}
+
+.btn-primary{
+    background-color: #1abb9c;
+    border-color: #1abb9c;
+    padding: 5px 20px;
+}
+
+.btn-primary:hover,
+.btn-primary:focus{
+    background-color: #109d82;
+    border-color: #109d82;
+}
+
+.text-error{
+    display: none;
+    color: red;
+}
+
+.ctn-btn-form{
+    border-top: 1px solid #cecece;
+    text-align: center;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+.text-required{
+    font-style: italic;
+    margin-bottom: 15px;
+}
