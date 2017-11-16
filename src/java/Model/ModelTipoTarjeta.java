@@ -17,6 +17,8 @@ public class ModelTipoTarjeta {
     private double Multa_TipoTarjeta;
     private int Codigo_Franquicia;
     private Date Fecha_Creacion;
+    
+    private String Acronimo_Franquicia;
 
     public ModelTipoTarjeta() {
     }
@@ -102,6 +104,14 @@ public class ModelTipoTarjeta {
 
     public void setFecha_Creacion(Date Fecha_Creacion) {
         this.Fecha_Creacion = Fecha_Creacion;
+    }
+
+    public String getAcronimo_Franquicia() {
+        return Acronimo_Franquicia;
+    }
+
+    public void setAcronimo_Franquicia(String Acronimo_Franquicia) {
+        this.Acronimo_Franquicia = Acronimo_Franquicia;
     }
     
     

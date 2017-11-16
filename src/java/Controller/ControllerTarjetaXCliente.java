@@ -1,11 +1,19 @@
 package Controller;
 
 import DAO.DAOTarjetaXCliente;
+import DAO.DAOTipoTarjeta;
+import DAO.DAOUsuario;
 import Model.ModelTarjetaXCliente;
+import Model.ModelTipoTarjeta;
+import Model.ModelUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Integer.max;
+import static java.lang.Math.random;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -42,7 +50,7 @@ public class ControllerTarjetaXCliente extends HttpServlet {
         {
             if(request.getParameter("create") != null)
             {
-                //CreateUser(request, response);
+                CreateTXC(request, response);
             }
             
         }
@@ -137,6 +145,47 @@ public class ControllerTarjetaXCliente extends HttpServlet {
             System.out.println(e.getMessage());
         }
         
+    }
+
+    private void CreateTXC(HttpServletRequest request, HttpServletResponse response) {
+        
+        try {
+            
+            boolean error = false;
+            DAOUsuario daoUsuario = new DAOUsuario();
+            DAOTipoTarjeta daoTipoTarjeta = new DAOTipoTarjeta();
+            
+            ModelTipoTarjeta mTipoTarjeta = daoTipoTarjeta.GetInfoTypeCard(Integer.parseInt(request.getParameter("TipoTarjeta")));
+            String numberCard = mTipoTarjeta.getCodigo_Franquicia() + mTipoTarjeta.getCodigo_TipoTarjeta() + numberCard();
+            
+            ModelTarjetaXCliente model = new ModelTarjetaXCliente();
+                                 model.setNumero_TarjetaXCliente(numberCard);
+                                 model.setCupo_TarjetaXCliente(Double.parseDouble(request.getParameter("CTarjeta")));
+                                 model.setCupoDisp_TarjetaXCliente(Double.parseDouble(request.getParameter("CTarjeta")));
+                                 model.setId_Usuario(request.getParameter("IdClient"));
+                                 model.setCodigo_TipoTarjeta(Integer.parseInt(request.getParameter("TipoTarjeta")));
+
+
+            
+            
+            //ModelUsuario mUsuario = daoUsuario.InfoUser();
+            
+            
+            
+            
+            
+        } catch (Exception e) {
+        }
+        
+    }
+    
+    private String numberCard(){
+        String cardNumber = "";
+        Random r = new Random();
+        for (int i = 0; i < 8; i++) {
+            cardNumber += ThreadLocalRandom.current().nextInt(0, 9 + 1);
+        }
+        return cardNumber;
     }
 
 }

@@ -30,8 +30,8 @@ public class DAOTarjetaXCliente extends Conexion{
         while (rs.next()){
             ModelTarjetaXCliente m = new ModelTarjetaXCliente();
             m.setNumero_TarjetaXCliente(rs.getString("Numero_TarjetaXCliente")); 
-            m.setCupo_TarjetaXCliente(rs.getInt("Cupo_TarjetaXCliente"));
-            m.setCupoDisp_TarjetaXCliente(rs.getInt("CupoDisp_TarjetaXCliente"));
+            m.setCupo_TarjetaXCliente(rs.getDouble("Cupo_TarjetaXCliente"));
+            m.setCupoDisp_TarjetaXCliente(rs.getDouble("CupoDisp_TarjetaXCliente"));
             m.setId_Usuario(rs.getString("Id_Usuario"));
             m.setCodigo_TipoTarjeta(rs.getInt("Codigo_TipoTarjeta"));            
             m.setFecha_Creacion(rs.getDate("Fecha_Creacion"));
@@ -58,8 +58,8 @@ public class DAOTarjetaXCliente extends Conexion{
         
         if (rs.next()){
             m.setNumero_TarjetaXCliente(rs.getString("Numero_TarjetaXCliente")); 
-            m.setCupo_TarjetaXCliente(rs.getInt("Cupo_TarjetaXCliente"));
-            m.setCupoDisp_TarjetaXCliente(rs.getInt("CupoDisp_TarjetaXCliente"));
+            m.setCupo_TarjetaXCliente(rs.getDouble("Cupo_TarjetaXCliente"));
+            m.setCupoDisp_TarjetaXCliente(rs.getDouble("CupoDisp_TarjetaXCliente"));
             m.setId_Usuario(rs.getString("Id_Usuario"));
             m.setCodigo_TipoTarjeta(rs.getInt("Codigo_TipoTarjeta"));
             m.setFecha_Creacion(rs.getDate("Fecha_Creacion"));
@@ -84,8 +84,8 @@ public class DAOTarjetaXCliente extends Conexion{
 
             PreparedStatement preparedStmt = (PreparedStatement) con.prepareStatement(query);
             preparedStmt.setString(1, model.getNumero_TarjetaXCliente());
-            preparedStmt.setInt(2, model.getCupo_TarjetaXCliente());
-            preparedStmt.setInt(3, model.getCupoDisp_TarjetaXCliente());
+            preparedStmt.setDouble(2, model.getCupo_TarjetaXCliente());
+            preparedStmt.setDouble(3, model.getCupoDisp_TarjetaXCliente());
             preparedStmt.setString(4, model.getId_Usuario());
             preparedStmt.setInt(5, model.getCodigo_TipoTarjeta());
             preparedStmt.setDate(6, (Date) model.getFecha_Creacion());            

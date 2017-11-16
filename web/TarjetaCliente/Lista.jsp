@@ -83,8 +83,8 @@
                                             out.println("<td>" + c.getNombre_TipoTarjeta()+ "</td>");
                                             out.println("<td>" + c.getId_Usuario()+ "</td>");
                                             out.println("<td>" + c.getNombre_Cliente() + "</td>");
-                                            out.println("<td>" + c.getCupo_TarjetaXCliente() + "</td>");
-                                            out.println("<td>" + c.getCupoDisp_TarjetaXCliente()+ "</td>");
+                                            out.println("<td>" + String.format("%.0f", c.getCupo_TarjetaXCliente()) + "</td>");
+                                            out.println("<td>" + String.format("%.0f", c.getCupoDisp_TarjetaXCliente()) + "</td>");
                                             out.println("<td><a href= '../TarjetaXCliente?opcion=info&noTarjeta=" + c.getNumero_TarjetaXCliente() + "'> <span class='glyphicon glyphicon-eye-open' aria-hidden='true'></span> Ver </a> "
                                                     + "<a href= '../TarjetaXCliente?opcion=edit&noTarjeta=" + c.getNumero_TarjetaXCliente()  + "'> <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Editar </a>   </td>");
                                             out.println("</tr>");

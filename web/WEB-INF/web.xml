@@ -28,6 +28,10 @@
         <servlet-name>ControllerTarjetaXCliente</servlet-name>
         <servlet-class>Controller.ControllerTarjetaXCliente</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControllerTipoTarjeta</servlet-name>
+        <servlet-class>Controller.ControllerTipoTarjeta</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControllerUsuario</servlet-name>
         <url-pattern>/Usuario</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>ControllerTarjetaXCliente</servlet-name>
         <url-pattern>/TarjetaXCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerTipoTarjeta</servlet-name>
+        <url-pattern>/TipoTarjeta</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

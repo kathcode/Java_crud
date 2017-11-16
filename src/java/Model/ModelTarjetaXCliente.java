@@ -9,8 +9,8 @@ import java.util.Date;
 public class ModelTarjetaXCliente {
     
     private String Numero_TarjetaXCliente;    
-    private int Cupo_TarjetaXCliente;
-    private int CupoDisp_TarjetaXCliente;
+    private double Cupo_TarjetaXCliente;
+    private double CupoDisp_TarjetaXCliente;
     private String Id_Usuario;
     private int Codigo_TipoTarjeta;
     private Date Fecha_Creacion;
@@ -23,7 +23,7 @@ public class ModelTarjetaXCliente {
     public ModelTarjetaXCliente() {
     }
 
-    public ModelTarjetaXCliente(String Numero_TarjetaXCliente, int Cupo_TarjetaXCliente, int CupoDisp_TarjetaXCliente, String Id_Usuario, int Codigo_TipoTarjeta) {
+    public ModelTarjetaXCliente(String Numero_TarjetaXCliente, double Cupo_TarjetaXCliente, double CupoDisp_TarjetaXCliente, String Id_Usuario, int Codigo_TipoTarjeta) {
         this.Numero_TarjetaXCliente = Numero_TarjetaXCliente;
         this.Cupo_TarjetaXCliente = Cupo_TarjetaXCliente;
         this.CupoDisp_TarjetaXCliente = CupoDisp_TarjetaXCliente;
@@ -41,19 +41,19 @@ public class ModelTarjetaXCliente {
         this.Numero_TarjetaXCliente = Numero_TarjetaXCliente;
     }
 
-    public int getCupo_TarjetaXCliente() {
+    public double getCupo_TarjetaXCliente() {
         return Cupo_TarjetaXCliente;
     }
 
-    public void setCupo_TarjetaXCliente(int Cupo_TarjetaXCliente) {
+    public void setCupo_TarjetaXCliente(double Cupo_TarjetaXCliente) {
         this.Cupo_TarjetaXCliente = Cupo_TarjetaXCliente;
     }
 
-    public int getCupoDisp_TarjetaXCliente() {
+    public double getCupoDisp_TarjetaXCliente() {
         return CupoDisp_TarjetaXCliente;
     }
 
-    public void setCupoDisp_TarjetaXCliente(int CupoDisp_TarjetaXCliente) {
+    public void setCupoDisp_TarjetaXCliente(double CupoDisp_TarjetaXCliente) {
         this.CupoDisp_TarjetaXCliente = CupoDisp_TarjetaXCliente;
     }
 

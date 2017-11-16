@@ -58,11 +58,11 @@
 
                             <div> 
                                 <span>Cupo total: </span>
-                                <% out.print(txc.getCupo_TarjetaXCliente()); %>  
+                                <% out.print(String.format("%.0f", txc.getCupo_TarjetaXCliente())); %>  
                             </div>
                             <div> 
                                 <span>Cupo disponible: </span>
-                                <% out.print(txc.getCupoDisp_TarjetaXCliente()); %>  
+                                <% out.print(String.format("%.0f", txc.getCupoDisp_TarjetaXCliente())); %>  
                             </div>
                             <div> 
                                 <span>Interes tarjeta: </span>
