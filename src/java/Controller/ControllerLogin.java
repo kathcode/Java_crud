@@ -35,19 +35,7 @@ public class ControllerLogin extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         
-        String usuario = request.getParameter("usuario");        
-        String password = request.getParameter("password");
-        
-        DAOLogin dao = new DAOLogin();
-        boolean result = dao.Autenticacion(usuario, password);
-        
-        if(result)
-        {
-            response.sendRedirect("Usuario/Lista.jsp");
-        }
-        else{
-            response.sendRedirect("index.jsp");
-        }
+        Login(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -96,5 +84,25 @@ public class ControllerLogin extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    protected void Login(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException
+    {
+        
+        String usuario = request.getParameter("usuario");        
+        String password = request.getParameter("password");
+        
+        DAOLogin dao = new DAOLogin();
+        boolean result = dao.Autenticacion(usuario, password);
+        
+        if(result)
+        {
+            response.sendRedirect("Usuario/Lista.jsp");
+        }
+        else{
+            request.setAttribute("errorMessage", "Usuario o contraseña incorrectos.");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
+    }
+
 
 }

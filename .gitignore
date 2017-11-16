@@ -1,1 +1,4 @@
 /Libraries
+/dist/
+/__MACOSX/
+/src/java/DAO/Conexion.java

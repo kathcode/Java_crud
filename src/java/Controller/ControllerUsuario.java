@@ -134,7 +134,7 @@ public class ControllerUsuario extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    protected void CreateUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException
+    protected void CreateUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException
     {
         
         try {
@@ -161,7 +161,9 @@ public class ControllerUsuario extends HttpServlet {
             }
             else
             {
-                System.out.println("El usuario ya existe en BD");
+                request.setAttribute("errorMessage", "Ya existe un usuario registrado con la misma identificación.");
+                request.getRequestDispatcher(VIEW_CREAR).forward(request, response);
+
             }
             
         } catch (SQLException e) {
