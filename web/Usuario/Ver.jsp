@@ -69,7 +69,10 @@
                         </div>
                         
                         <br/>
-                        <a href="Usuario/Lista.jsp" class="btn btn-primary">Regresar</a>
+                        
+                        <div class="ctn-btn-form">
+                            <a href="Usuario/Lista.jsp" class="btn btn-primary">Regresar</a>
+                        </div>
                                 
                         </div>
                     </div>

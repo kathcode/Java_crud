@@ -33,7 +33,7 @@ public class DAOTipoTarjeta extends Conexion{
             m.setAcronimo_TipoTarjeta(rs.getString("Acronimo_TipoTarjeta"));
             m.setInteres_TipoTarjeta(rs.getDouble("Interes_TipoTarjeta"));
             m.setPlazoMax_TipoTarjeta(rs.getInt("PlazoMax_TipoTarjeta"));
-            m.setCupoMax_TipoTarjeta(new BigInteger(rs.getString("CupoMax_TipoTarjeta")));
+            m.setCupoMax_TipoTarjeta(rs.getDouble("CupoMax_TipoTarjeta"));
             m.setMulta_TipoTarjeta(rs.getDouble("Codigo_Franquicia"));            
             m.setCodigo_Franquicia(rs.getInt("Multa_TipoTarjeta"));
             return m;

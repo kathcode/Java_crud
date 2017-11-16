@@ -21,7 +21,10 @@ public class DAOTarjetaXCliente extends Conexion{
         List<ModelTarjetaXCliente> list = new LinkedList<>();
         Statement st = con.createStatement();
         ResultSet rs = null;
-        String query = "Select * FROM Tarjeta_X_Cliente";
+        String query = "SELECT Numero_TarjetaXCliente, Cupo_TarjetaXCliente, CupoDisp_TarjetaXCliente, TC.Id_Usuario, TC.Codigo_TipoTarjeta, TC.Fecha_Creacion," 
+                        +" Nombre_Usuario, Apellidos_Usuario, Nombre_TipoTarjeta " 
+                        +"FROM Usuario U INNER JOIN Tarjeta_X_Cliente TC ON U.Id_Usuario = TC.Id_Usuario "
+                        +"INNER JOIN Tipo_Tarjeta TT ON TC.Codigo_TipoTarjeta = TT.Codigo_TipoTarjeta";
         rs = st.executeQuery(query);
         
         while (rs.next()){
@@ -30,8 +33,10 @@ public class DAOTarjetaXCliente extends Conexion{
             m.setCupo_TarjetaXCliente(rs.getInt("Cupo_TarjetaXCliente"));
             m.setCupoDisp_TarjetaXCliente(rs.getInt("CupoDisp_TarjetaXCliente"));
             m.setId_Usuario(rs.getString("Id_Usuario"));
-            m.setCodigo_TipoTarjeta(rs.getInt("Codigo_TipoTarjeta"));
+            m.setCodigo_TipoTarjeta(rs.getInt("Codigo_TipoTarjeta"));            
             m.setFecha_Creacion(rs.getDate("Fecha_Creacion"));
+            m.setNombre_TipoTarjeta(rs.getString("Nombre_TipoTarjeta"));
+            m.setNombre_Cliente(rs.getString("Nombre_Usuario") + " " + rs.getString("Apellidos_Usuario"));
             list.add(m);
         }
         
@@ -43,7 +48,12 @@ public class DAOTarjetaXCliente extends Conexion{
         ModelTarjetaXCliente m = new ModelTarjetaXCliente();
         Statement st = con.createStatement();
         ResultSet rs = null;
-        String query = "Select * FROM Tarjeta_X_Cliente WHERE Numero_TarjetaXCliente = " + nTarjeta;
+        String query = "SELECT Numero_TarjetaXCliente, Cupo_TarjetaXCliente, CupoDisp_TarjetaXCliente, TC.Id_Usuario, TC.Codigo_TipoTarjeta, TC.Fecha_Creacion," 
+                        +" Nombre_Usuario, Apellidos_Usuario, Nombre_TipoTarjeta, Interes_TipoTarjeta " 
+                        +"FROM Usuario U INNER JOIN Tarjeta_X_Cliente TC ON U.Id_Usuario = TC.Id_Usuario "
+                        +"INNER JOIN Tipo_Tarjeta TT ON TC.Codigo_TipoTarjeta = TT.Codigo_TipoTarjeta "
+                        +"WHERE Numero_TarjetaXCliente = " + nTarjeta;
+        
         rs = st.executeQuery(query);
         
         if (rs.next()){
@@ -53,6 +63,9 @@ public class DAOTarjetaXCliente extends Conexion{
             m.setId_Usuario(rs.getString("Id_Usuario"));
             m.setCodigo_TipoTarjeta(rs.getInt("Codigo_TipoTarjeta"));
             m.setFecha_Creacion(rs.getDate("Fecha_Creacion"));
+            m.setNombre_TipoTarjeta(rs.getString("Nombre_TipoTarjeta"));            
+            m.setInteres_TipoTarjeta(rs.getDouble("Interes_TipoTarjeta"));
+            m.setNombre_Cliente(rs.getString("Nombre_Usuario") + " " + rs.getString("Apellidos_Usuario"));
 
             return m;
         }

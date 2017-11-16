@@ -122,6 +122,52 @@ function validacionUsuario() {
     return true;
 }
 
+function validacionCompra() {
+
+    var idClient = $("#IdClient").val();
+    var noTarjeta = $("#NoTarjeta").val();
+    var descripcion = $("#Descripcion").val();
+    var vCompra = $("#VCompra").val();
+    var nCuotas = $("#NCuotas").val();
+    
+    $("#text-error").css("display", "none");
+
+    if (idClient == "" || idClient == " "){
+        $("#text-error").text("*Por favor, ingrese la identificación del cliente.");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+    if (noTarjeta == "" || noTarjeta == " "){
+        $("#text-error").text("*Por favor, ingrese el No. de la tarjeta.");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+    if (descripcion == "" || descripcion == " "){
+        $("#text-error").text("*Por favor, ingrese la descripción de la compra.");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+    if (vCompra == "" || vCompra == " "){
+        $("#text-error").text("*Por favor, ingrese el valor de la compra.");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+    if (nCuotas == "" || nCuotas == " "){
+        $("#text-error").text("*Por favor, ingrese el número de cuotas.");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+
+    return true;
+}
+
+
+
 function validatePass(pass) {
     var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
     var test = re.test(pass);

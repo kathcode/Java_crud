@@ -43,7 +43,13 @@
                                 ModelCompra compra = (ModelCompra) proyec.getInfoCompra();
                                 List<ModelInfoProyeccion> infoProyec = (List<ModelInfoProyeccion>) proyec.getInfoProyeccion();
                             %>
-
+                            
+                            
+                            <div>
+                                <span>Descripción Compra: </span>
+                                <% out.print(compra.getDescripcion_Compra()); %>  
+                            </div>
+                            
                             <div>
                                 <span>Fecha compra: </span>
                                 <% out.print(compra.getFecha_Compra()); %>  
