@@ -13,10 +13,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Lista de usuarios</title>
-        <link href="../Lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>        
-        <link href="../Lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-        <link href="../Css/custom.min.css" rel="stylesheet" type="text/css"/>        
-        <link href="../Css/main.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/Lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>        
+        <link href="${pageContext.request.contextPath}/Lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/Css/custom.min.css" rel="stylesheet" type="text/css"/>        
+        <link href="${pageContext.request.contextPath}/Css/main.css" rel="stylesheet" type="text/css"/>
 
     </head>
 
@@ -83,8 +83,7 @@
                                             out.println("<td>" + c.getDeudaInicial_Compra() + "</td>");
                                             out.println("<td>" + c.getDeudaActual_Compra() + "</td>");
                                             out.println("<td>" + c.getInteres_Compra()  + "</td>");
-                                            out.println("<td><a href= '../Compra?opcion=info&idUsuario=" + c.getId_Compra() + "'> <span class='glyphicon glyphicon-eye-open' aria-hidden='true'></span> Ver </a> "
-                                                    + "<a href= '../Compra?opcion=proyeccion&idCompra=" + c.getId_Compra()  + "'> <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Proyección </a>   </td>");
+                                            out.println("<td><a href= '../Compra?opcion=proyeccion&idCompra=" + c.getId_Compra()  + "'> <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Proyección </a>   </td>");
                                             out.println("</tr>");
                                         }
                                     %>
@@ -104,9 +103,9 @@
 
 </body>
 
-<script src="../Js/jquery-3.2.1.min.js" type="text/javascript"></script>
-<script src="../Lib/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>    
-<script src="../Js/custom.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/Js/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/Lib/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>    
+<script src="${pageContext.request.contextPath}/Js/custom.min.js" type="text/javascript"></script>
 
 
 </html>

@@ -195,8 +195,7 @@ public class ControllerUsuario extends HttpServlet {
             oldUser = user;
             request.setAttribute("oldUser", user);
             
-            if(request.getParameter("opcion").equals("edit")){
-                
+            if(request.getParameter("opcion").equals("edit")){             
                 vista = request.getRequestDispatcher(VIEW_EDITAR);
             }
             else{

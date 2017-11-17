@@ -57,7 +57,7 @@
                             %>
 
                             <div class="form-group ctn-btn-login">
-                                <button type="submit" class="btn btn-primary">Ingresar</button>
+                                <button id="submit" type="submit" class="btn btn-primary">Ingresar</button>
                             </div>
 
                         </form>

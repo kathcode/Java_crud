@@ -13,15 +13,17 @@ public class ModelTipoTarjeta {
     private String Acronimo_TipoTarjeta;
     private double Interes_TipoTarjeta;
     private int PlazoMax_TipoTarjeta;
-    private BigInteger CupoMax_TipoTarjeta;
+    private double CupoMax_TipoTarjeta;
     private double Multa_TipoTarjeta;
     private int Codigo_Franquicia;
     private Date Fecha_Creacion;
+    
+    private String Acronimo_Franquicia;
 
     public ModelTipoTarjeta() {
     }
 
-    public ModelTipoTarjeta(int Codigo_TipoTarjeta, String Nombre_TipoTarjeta, String Acronimo_TipoTarjeta, double Interes_TipoTarjeta, int PlazoMax_TipoTarjeta, BigInteger CupoMax_TipoTarjeta, double Multa_TipoTarjeta, int Codigo_Franquicia) {
+    public ModelTipoTarjeta(int Codigo_TipoTarjeta, String Nombre_TipoTarjeta, String Acronimo_TipoTarjeta, double Interes_TipoTarjeta, int PlazoMax_TipoTarjeta, double CupoMax_TipoTarjeta, double Multa_TipoTarjeta, int Codigo_Franquicia) {
         this.Codigo_TipoTarjeta = Codigo_TipoTarjeta;
         this.Nombre_TipoTarjeta = Nombre_TipoTarjeta;
         this.Acronimo_TipoTarjeta = Acronimo_TipoTarjeta;
@@ -72,11 +74,11 @@ public class ModelTipoTarjeta {
         this.PlazoMax_TipoTarjeta = PlazoMax_TipoTarjeta;
     }
 
-    public BigInteger getCupoMax_TipoTarjeta() {
+    public double getCupoMax_TipoTarjeta() {
         return CupoMax_TipoTarjeta;
     }
 
-    public void setCupoMax_TipoTarjeta(BigInteger CupoMax_TipoTarjeta) {
+    public void setCupoMax_TipoTarjeta(double CupoMax_TipoTarjeta) {
         this.CupoMax_TipoTarjeta = CupoMax_TipoTarjeta;
     }
 
@@ -102,6 +104,14 @@ public class ModelTipoTarjeta {
 
     public void setFecha_Creacion(Date Fecha_Creacion) {
         this.Fecha_Creacion = Fecha_Creacion;
+    }
+
+    public String getAcronimo_Franquicia() {
+        return Acronimo_Franquicia;
+    }
+
+    public void setAcronimo_Franquicia(String Acronimo_Franquicia) {
+        this.Acronimo_Franquicia = Acronimo_Franquicia;
     }
     
     

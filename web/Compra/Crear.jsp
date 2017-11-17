@@ -47,18 +47,22 @@
                                 }
                             %>
                             
+                            <div class="text-required">
+                                Los campos marcados con * son obligatorios
+                            </div>
                             
-                            <form action="${pageContext.request.contextPath}/Compra" method="post">
+                            
+                            <form action="${pageContext.request.contextPath}/Compra" onsubmit="return validacionCompra()" method="post">
                                 
                                 
                                 <div class="form-group">
-                                    <label for="formUsuario">No. Cedula cliente</label>
+                                    <label for="formUsuario">Identificación del cliente*</label>
                                     
                                     <% 
                                         if(idCliente != null){
-                                            out.print("<input type='text' class='form-control' id='IdClient' name='IdClient' value='" + idCliente + "' placeholder='No. Cedula cliente'>");
+                                            out.print("<input type='text' class='form-control' id='IdClient' name='IdClient' value='" + idCliente + "' placeholder='Identificación'>");
                                         }else{
-                                            out.print("<input type='text' class='form-control' id='IdClient' name='IdClient' placeholder='No. Cedula cliente'>");
+                                            out.print("<input type='text' class='form-control' id='IdClient' name='IdClient' placeholder='Identificación'>");
                                         }
                                     
                                     %>
@@ -66,13 +70,13 @@
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="formUsuario">No. Tarjeta</label>
+                                    <label for="formUsuario">Número Tarjeta*</label>
                                     
                                     <% 
                                         if(idCliente != null){
-                                            out.print("<input type='text' class='form-control' id='NoTarjeta' name='NoTarjeta' value='" + modelCompra.getNumero_TarjetaXCliente() + "' placeholder='No. Tarjeta'>");
+                                            out.print("<input type='text' class='form-control' id='NoTarjeta' name='NoTarjeta' onkeypress='return isNumberKey(event)' value='" + modelCompra.getNumero_TarjetaXCliente() + "' placeholder='Número Tarjeta'>");
                                         }else{
-                                            out.print("<input type='text' class='form-control' id='NoTarjeta' name='NoTarjeta' placeholder='No. Tarjeta'>");
+                                            out.print("<input type='text' class='form-control' id='NoTarjeta' name='NoTarjeta' placeholder='Número Tarjeta' onkeypress='return isNumberKey(event)'>");
                                         }
                                     
                                     %>
@@ -80,7 +84,7 @@
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="formUsuario">Descripción compra</label>
+                                    <label for="formUsuario">Descripción compra*</label>
                                     
                                     <% 
                                         if(idCliente != null){
@@ -95,35 +99,39 @@
                                 
                                 
                                 <div class="form-group">
-                                    <label for="formUsuario">Valor de la compra</label>
+                                    <label for="formUsuario">Valor de la compra*</label>
                                     
                                     <% 
                                         if(idCliente != null){
-                                            out.print("<input type='text' class='form-control' id='VCompra' name='VCompra' value='" + modelCompra.getDeudaActual_Compra() + "' placeholder='Valor compra'>");
+                                            out.print("<input type='text' class='form-control' id='VCompra' name='VCompra' onkeypress='return isNumberKey(event)' value='" + modelCompra.getDeudaActual_Compra() + "' placeholder='Valor compra'>");
                                         }else{
-                                            out.print("<input type='text' class='form-control' id='VCompra' name='VCompra' placeholder='Valor compra'>");
+                                            out.print("<input type='text' class='form-control' id='VCompra' name='VCompra' onkeypress='return isNumberKey(event)' placeholder='Valor compra'>");
                                         }
                                     
                                     %>
             
                                 </div>
                                 <div class="form-group">
-                                    <label for="formUsuario">No. de cuotas</label>
+                                    <label for="formUsuario">Número de cuotas*</label>
                                     
                                     <% 
                                         if(idCliente != null){
-                                            out.print("<input type='text' class='form-control' id='NCuotas' name='NCuotas' value='" + modelCompra.getNumeroCuotas_Compra() + "' placeholder='No. Cuotas'>");
+                                            out.print("<input type='text' class='form-control' id='NCuotas' name='NCuotas' onkeypress='return isNumberKey(event)' value='" + modelCompra.getNumeroCuotas_Compra() + "' placeholder='Número Cuotas'>");
                                         }else{
-                                            out.print("<input type='text' class='form-control' id='NCuotas' name='NCuotas' placeholder='No. Cuotas'>");
+                                            out.print("<input type='text' class='form-control' id='NCuotas' name='NCuotas' onkeypress='return isNumberKey(event)' placeholder='Número Cuotas'>");
                                         }
                                     
                                     %>
 
                                 </div>
+                                    
+                                    
+                                <div id="text-error" class="text-error"></div>
                                 
- 
-                                <a href="Lista.jsp" class="btn btn-default">Cancelar</a>
-                                <button type="submit" name="create" class="btn btn-primary">Crear compra</button>
+                                <div class="ctn-btn-form">
+                                    <a href="Lista.jsp" class="btn btn-default">Cancelar</a>
+                                    <button type="submit" name="create" class="btn btn-primary">Crear compra</button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -136,5 +144,6 @@
     <script src="${pageContext.request.contextPath}/Js/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/Lib/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>    
     <script src="${pageContext.request.contextPath}/Js/custom.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/Js/validaciones.js" type="text/javascript"></script>
 
 </html>
