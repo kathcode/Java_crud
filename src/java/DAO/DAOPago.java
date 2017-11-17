@@ -31,7 +31,7 @@ public class DAOPago extends Conexion {
             
             ResultSet rs = null;
             String query = "INSERT INTO Programacion_Pagos(Id_Pago, Fecha_de_Pago, Valor_Saldo, Abono_Capital, Valor_Interes, Valor_Cuota, Nuevo_Saldo, Estado_Pago, Id_Compra,	Fecha_Realizado, Fecha_Creacion)"
-                        + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+                        + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
             Calendar calendar = Calendar.getInstance();
             Date fecha_creacion = new Date(calendar.getTime().getTime());
@@ -52,6 +52,7 @@ public class DAOPago extends Conexion {
             preparedStmt.executeUpdate();
             
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
     

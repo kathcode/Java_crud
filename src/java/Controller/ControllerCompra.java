@@ -10,15 +10,18 @@ import DAO.DAOPago;
 import DAO.DAOTarjetaXCliente;
 import DAO.DAOTipoTarjeta;
 import Model.ModelCompra;
-import Model.ModelInfoProyeccion;
 import Model.ModelListProyeccion;
 import Model.ModelPago;
 import Model.ModelProyeccion;
 import Model.ModelTarjetaXCliente;
 import Model.ModelTipoTarjeta;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -33,12 +36,13 @@ import static jdk.nashorn.internal.objects.NativeMath.round;
  * @author esneiderserna
  */
 public class ControllerCompra extends HttpServlet {
-    
+
     private final DAOCompra DAO = new DAOCompra();
     private final String VIEW_LISTA = "Compra/Lista.jsp";
     private final String VIEW_PROYECCION = "Compra/Proyeccion.jsp";
     private final String VIEW_CREAR = "Compra/Crear.jsp";
     private DecimalFormat twoDForm = new DecimalFormat("#.00");
+    NumberFormat nf = NumberFormat.getInstance();
     private ModelCompra shopping;
 
     /**
@@ -53,30 +57,24 @@ public class ControllerCompra extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String option = (String) request.getParameter("opcion");
-        
-        if(option == null)
-        {
-            if(request.getParameter("create") != null)
-            {
+
+        if (option == null) {
+            if (request.getParameter("create") != null) {
                 CreateShopping(request, response);
             }
-            
-        }
-        else
-        {
-            if(option.equals("listarCompras"))
-            {
+
+        } else {
+            if (option.equals("listarCompras")) {
                 ListShopping(request, response);
             }
-            
-            if(option.equals("proyeccion"))
-            {
+
+            if (option.equals("proyeccion")) {
                 Proyection(request, response);
             }
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -118,134 +116,140 @@ public class ControllerCompra extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void ListShopping(HttpServletRequest request, HttpServletResponse response) 
-    {
-        
+    private void ListShopping(HttpServletRequest request, HttpServletResponse response) {
+
         try {
-            
+
             List<ModelCompra> listShoppings = DAO.ListShopping();
             request.setAttribute("listShoppings", listShoppings);
-            
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        
+
     }
 
-    private void Proyection(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-    {
-        
+    private void Proyection(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         try {
-        
+
             ModelCompra compra = DAO.DetailShopping(Integer.parseInt(request.getParameter("idCompra")));
             RequestDispatcher vista;
-            
-            
+
             ModelListProyeccion proyec = GenerateProyection(compra, false);
-            
+
             request.setAttribute("proyec", proyec);
             vista = request.getRequestDispatcher(VIEW_PROYECCION);
             vista.forward(request, response);
-            
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        
-    
+
     }
 
-    private ModelListProyeccion GenerateProyection(ModelCompra compra, boolean newShopping) 
-    {
-        
-        DAOPago daoPago = new DAOPago();
-        ModelListProyeccion proyection = new ModelListProyeccion();
-        List<ModelPago> infoProyec = new LinkedList<>();
-        
-        int cuotas = compra.getNumeroCuotas_Compra();
-        int valorCompra = compra.getDeudaInicial_Compra();
-        double interes = compra.getInteres_Compra();
-        int cuotaMensual = valorCompra/cuotas;
-        int vSaldo = compra.getDeudaInicial_Compra();
-        
-        proyection.setInfoCompra(compra);
-        proyection.setCuota_Mensual(cuotaMensual);
-        
-        for (int i = 1; i <= cuotas; i++) {
-            ModelPago m = new ModelPago();
-            double vInteres = Double.parseDouble(twoDForm.format(vSaldo * interes));
-            int nSaldo = vSaldo - cuotaMensual;
-            double vCuota = cuotaMensual + vInteres;
+    private ModelListProyeccion GenerateProyection(ModelCompra compra, boolean newShopping) {
+
+        try {
+
+            DAOPago daoPago = new DAOPago();
+            ModelListProyeccion proyection = new ModelListProyeccion();
+            List<ModelPago> infoProyec = new LinkedList<>();
+
+            int cuotas = compra.getNumeroCuotas_Compra();
+            int valorCompra = compra.getDeudaInicial_Compra();
+            double interes = compra.getInteres_Compra();
+            int cuotaMensual = valorCompra / cuotas;
+            int vSaldo = compra.getDeudaInicial_Compra();
             
-            m.setId_Pago(i);
-            m.setFecha_de_Pago(compra.getFecha_Compra());
-            m.setValor_Saldo(vSaldo);
-            m.setAbono_Capital(cuotaMensual);
-            m.setValor_Interes(vInteres);
-            m.setNuevo_Saldo(nSaldo);
-            m.setValor_Cuota(vCuota);
-            m.setId_Compra(compra.getId_Compra());
-            vSaldo = nSaldo;
-            
-            infoProyec.add(m);
-            
-            if(newShopping){
-                m.setId_Compra(0);
-                m.setEstado_Pago(false);
-                daoPago.CreatePay(m);
+            Calendar calendar = Calendar.getInstance();
+
+
+            proyection.setInfoCompra(compra);
+            proyection.setCuota_Mensual(cuotaMensual);
+
+            for (int i = 1; i <= cuotas; i++) {
+                ModelPago m = new ModelPago();
+                double vInteres = nf.parse(twoDForm.format(vSaldo * interes)).doubleValue();
+                int nSaldo = vSaldo - cuotaMensual;
+                double vCuota = cuotaMensual + vInteres;
+                
+                calendar.setTime(compra.getFecha_Compra());
+                calendar.add(Calendar.MONTH, i);    
+                calendar.set(Calendar.DAY_OF_MONTH, 1);
+                Date fechaPago = new Date(calendar.getTime().getTime());
+                        
+                m.setId_Pago(i);
+                m.setFecha_de_Pago(fechaPago);
+                m.setValor_Saldo(vSaldo);
+                m.setAbono_Capital(cuotaMensual);
+                m.setValor_Interes(vInteres);
+                m.setNuevo_Saldo(nSaldo);
+                m.setValor_Cuota(vCuota);
+                m.setId_Compra(compra.getId_Compra());
+                vSaldo = nSaldo;
+                infoProyec.add(m);
+
+                if (newShopping) {
+                    m.setId_Pago(0);
+                    m.setId_Compra(compra.getId_Compra());
+                    m.setEstado_Pago(false);
+                    daoPago.CreatePay(m);
+                }
+
             }
-            
-            
+
+            proyection.setInfoProyeccion(infoProyec);
+
+            return proyection;
+
+        } catch (ParseException e) {
         }
         
-        proyection.setInfoProyeccion(infoProyec);
-   
-        return proyection;
+        return null;
+
     }
 
-    private void CreateShopping(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-    {
-        
+    private void CreateShopping(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         try {
-            
+
             boolean error = false;
             DAOTarjetaXCliente daoTarjetaXC = new DAOTarjetaXCliente();
             DAOTipoTarjeta daoTipoTarjeta = new DAOTipoTarjeta();
-            
+
             ModelCompra model = new ModelCompra();
-                        model.setId_Compra(0);
-                        model.setDescripcion_Compra(request.getParameter("Descripcion"));
-                        model.setNumero_TarjetaXCliente(request.getParameter("NoTarjeta"));
-                        model.setDeudaInicial_Compra(Integer.parseInt(request.getParameter("VCompra")));
-                        model.setDeudaActual_Compra(Integer.parseInt(request.getParameter("VCompra")));
-                        model.setNumeroCuotas_Compra(Integer.parseInt(request.getParameter("NCuotas")));
-            
-                        
-            request.setAttribute("idCliente", request.getParameter("IdClient")); 
-            request.setAttribute("modelCompra", model); 
+            model.setId_Compra(0);
+            model.setDescripcion_Compra(request.getParameter("Descripcion"));
+            model.setNumero_TarjetaXCliente(request.getParameter("NoTarjeta"));
+            model.setDeudaInicial_Compra(Integer.parseInt(request.getParameter("VCompra")));
+            model.setDeudaActual_Compra(Integer.parseInt(request.getParameter("VCompra")));
+            model.setNumeroCuotas_Compra(Integer.parseInt(request.getParameter("NCuotas")));
+
+            request.setAttribute("idCliente", request.getParameter("IdClient"));
+            request.setAttribute("modelCompra", model);
 
             //Consulta la tarjeta del cliente
             ModelTarjetaXCliente mTarjetaXC = daoTarjetaXC.GetInfoCard(model.getNumero_TarjetaXCliente());
 
             //Valida que exista una tarjata asignada al cliente con el numero
-            if(mTarjetaXC != null){
-                
+            if (mTarjetaXC != null) {
+
                 //Consulta el tipo de tarjeta
                 ModelTipoTarjeta mTipoTarjeta = daoTipoTarjeta.GetInfoTypeCard(mTarjetaXC.getCodigo_TipoTarjeta());
                 // asigno el interes
                 model.setInteres_Compra(mTipoTarjeta.getInteres_TipoTarjeta());
-                
+
                 //Valida que la tarjeta si pertenezca al cliente
-                if(mTarjetaXC.getId_Usuario().equals(request.getParameter("IdClient"))){
-                    
+                if (mTarjetaXC.getId_Usuario().equals(request.getParameter("IdClient"))) {
+
                     //Valida que el valor de la compra no sea superior al disponible
-                    if(mTarjetaXC.getCupoDisp_TarjetaXCliente() >= model.getDeudaInicial_Compra() && model.getDeudaInicial_Compra() > 0 )
-                    {
-                        
-                        if(model.getNumeroCuotas_Compra() <= mTipoTarjeta.getPlazoMax_TipoTarjeta() && model.getNumeroCuotas_Compra() > 0)
-                        {
+                    if (mTarjetaXC.getCupoDisp_TarjetaXCliente() >= model.getDeudaInicial_Compra() && model.getDeudaInicial_Compra() > 0) {
+
+                        if (model.getNumeroCuotas_Compra() <= mTipoTarjeta.getPlazoMax_TipoTarjeta() && model.getNumeroCuotas_Compra() > 0) {
                             //Guarda la compra
                             int idShopping = DAO.CreateShopping(model);
-                            
+
                             model.setId_Compra(idShopping);
                             GenerateProyection(model, true);
 
@@ -255,34 +259,34 @@ public class ControllerCompra extends HttpServlet {
 
                             //Muestra la proyeccion
                             response.sendRedirect("Compra?opcion=proyeccion&idCompra=" + idShopping);
-                        
-                        }else{
+
+                        } else {
                             request.setAttribute("errorMessage", "El numero de cuotas debe ser mayor a 0 e inferior o igual a " + mTipoTarjeta.getPlazoMax_TipoTarjeta());
                             error = true;
-                        } 
-                        
-                    }else{
+                        }
+
+                    } else {
                         request.setAttribute("errorMessage", "Cupo insuficiente.");
                         error = true;
-                    }  
-                
-                }else{
+                    }
+
+                } else {
                     request.setAttribute("errorMessage", "La tarjeta no pertece al cliente.");
                     error = true;
                 }
-            
-            }else{
+
+            } else {
                 request.setAttribute("errorMessage", "El número de la tarjeta no es valido.");
                 error = true;
             }
-            
-            if(error){
+
+            if (error) {
                 request.getRequestDispatcher(VIEW_CREAR).forward(request, response);
-            } 
-            
+            }
+
         } catch (SQLException e) {
         }
-        
+
     }
 
 }

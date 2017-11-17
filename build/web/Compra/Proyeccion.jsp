@@ -6,7 +6,6 @@
 
 <%@page import="Model.ModelPago"%>
 <%@page import="Model.ModelListProyeccion"%>
-<%@page import="Model.ModelInfoProyeccion"%>
 <%@page import="java.util.List"%>
 <%@page import="Model.ModelCompra"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
