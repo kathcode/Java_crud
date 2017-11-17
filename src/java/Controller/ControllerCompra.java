@@ -6,16 +6,19 @@
 package Controller;
 
 import DAO.DAOCompra;
+import DAO.DAOPago;
 import DAO.DAOTarjetaXCliente;
 import DAO.DAOTipoTarjeta;
 import Model.ModelCompra;
 import Model.ModelInfoProyeccion;
 import Model.ModelListProyeccion;
+import Model.ModelPago;
 import Model.ModelProyeccion;
 import Model.ModelTarjetaXCliente;
 import Model.ModelTipoTarjeta;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -23,6 +26,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static jdk.nashorn.internal.objects.NativeMath.round;
 
 /**
  *
@@ -34,6 +38,7 @@ public class ControllerCompra extends HttpServlet {
     private final String VIEW_LISTA = "Compra/Lista.jsp";
     private final String VIEW_PROYECCION = "Compra/Proyeccion.jsp";
     private final String VIEW_CREAR = "Compra/Crear.jsp";
+    private DecimalFormat twoDForm = new DecimalFormat("#.00");
     private ModelCompra shopping;
 
     /**
@@ -136,7 +141,7 @@ public class ControllerCompra extends HttpServlet {
             RequestDispatcher vista;
             
             
-            ModelListProyeccion proyec = GenerateProyection(compra);
+            ModelListProyeccion proyec = GenerateProyection(compra, false);
             
             request.setAttribute("proyec", proyec);
             vista = request.getRequestDispatcher(VIEW_PROYECCION);
@@ -149,11 +154,12 @@ public class ControllerCompra extends HttpServlet {
     
     }
 
-    private ModelListProyeccion GenerateProyection(ModelCompra compra) 
+    private ModelListProyeccion GenerateProyection(ModelCompra compra, boolean newShopping) 
     {
         
+        DAOPago daoPago = new DAOPago();
         ModelListProyeccion proyection = new ModelListProyeccion();
-        List<ModelInfoProyeccion> infoProyec = new LinkedList<>();
+        List<ModelPago> infoProyec = new LinkedList<>();
         
         int cuotas = compra.getNumeroCuotas_Compra();
         int valorCompra = compra.getDeudaInicial_Compra();
@@ -165,21 +171,30 @@ public class ControllerCompra extends HttpServlet {
         proyection.setCuota_Mensual(cuotaMensual);
         
         for (int i = 1; i <= cuotas; i++) {
-            ModelInfoProyeccion m = new ModelInfoProyeccion();
-            double vInteres = vSaldo * interes;
+            ModelPago m = new ModelPago();
+            double vInteres = Double.parseDouble(twoDForm.format(vSaldo * interes));
             int nSaldo = vSaldo - cuotaMensual;
             double vCuota = cuotaMensual + vInteres;
             
-            m.setNumero_Couta(i);
-            m.setFecha(compra.getFecha_Compra());
+            m.setId_Pago(i);
+            m.setFecha_de_Pago(compra.getFecha_Compra());
             m.setValor_Saldo(vSaldo);
             m.setAbono_Capital(cuotaMensual);
             m.setValor_Interes(vInteres);
             m.setNuevo_Saldo(nSaldo);
             m.setValor_Cuota(vCuota);
-            
+            m.setId_Compra(compra.getId_Compra());
             vSaldo = nSaldo;
+            
             infoProyec.add(m);
+            
+            if(newShopping){
+                m.setId_Compra(0);
+                m.setEstado_Pago(false);
+                daoPago.CreatePay(m);
+            }
+            
+            
         }
         
         proyection.setInfoProyeccion(infoProyec);
@@ -230,6 +245,9 @@ public class ControllerCompra extends HttpServlet {
                         {
                             //Guarda la compra
                             int idShopping = DAO.CreateShopping(model);
+                            
+                            model.setId_Compra(idShopping);
+                            GenerateProyection(model, true);
 
                             //Actualiza el cupo disponible de la tarjeta
                             mTarjetaXC.setCupoDisp_TarjetaXCliente(mTarjetaXC.getCupoDisp_TarjetaXCliente() - model.getDeudaInicial_Compra());

@@ -14,7 +14,7 @@ import java.util.List;
 public class ModelListProyeccion {
     
     private ModelCompra InfoCompra;
-    private List<ModelInfoProyeccion> InfoProyeccion;
+    private List<ModelPago> InfoPago;
     private int Cuota_Mensual;
 
     public ModelListProyeccion() {
@@ -28,12 +28,12 @@ public class ModelListProyeccion {
         this.InfoCompra = InfoCompra;
     }
 
-    public List<ModelInfoProyeccion> getInfoProyeccion() {
-        return InfoProyeccion;
+    public List<ModelPago> getInfoProyeccion() {
+        return InfoPago;
     }
 
-    public void setInfoProyeccion(List<ModelInfoProyeccion> InfoProyeccion) {
-        this.InfoProyeccion = InfoProyeccion;
+    public void setInfoProyeccion(List<ModelPago> InfoPago) {
+        this.InfoPago = InfoPago;
     }
     
     public int getCuota_Mensual() {
