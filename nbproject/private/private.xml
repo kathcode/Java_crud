@@ -2,6 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Volumes/MaruloSD/Sandbox/Poli/Garantizar/PPI-Proyecto-Bato/web/Compra/Proyeccion.jsp</file>
+            <file>file:/Volumes/MaruloSD/Sandbox/Poli/Garantizar/PPI-Proyecto-Bato/web/TarjetaCliente/Lista.jsp</file>
+            <file>file:/Volumes/MaruloSD/Sandbox/Poli/Garantizar/PPI-Proyecto-Bato/src/java/Controller/ControllerCompra.java</file>
+            <file>file:/Volumes/MaruloSD/Sandbox/Poli/Garantizar/PPI-Proyecto-Bato/src/java/DAO/DAOUsuario.java</file>
+            <file>file:/Volumes/MaruloSD/Sandbox/Poli/Garantizar/PPI-Proyecto-Bato/src/java/Model/ModelProyeccion.java</file>
+            <file>file:/Volumes/MaruloSD/Sandbox/Poli/Garantizar/PPI-Proyecto-Bato/src/java/DAO/DAOCompra.java</file>
+            <file>file:/Volumes/MaruloSD/Sandbox/Poli/Garantizar/PPI-Proyecto-Bato/src/java/DAO/DAOPago.java</file>
+            <file>file:/Volumes/MaruloSD/Sandbox/Poli/Garantizar/PPI-Proyecto-Bato/src/java/DAO/DAOTarjetaXCliente.java</file>
+            <file>file:/Volumes/MaruloSD/Sandbox/Poli/Garantizar/PPI-Proyecto-Bato/src/java/Model/ModelPago.java</file>
+            <file>file:/Volumes/MaruloSD/Sandbox/Poli/Garantizar/PPI-Proyecto-Bato/src/java/Model/ModelListProyeccion.java</file>
+        </group>
     </open-files>
 </project-private>

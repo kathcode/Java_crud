@@ -4,8 +4,8 @@
     Author     : esneiderserna
 --%>
 
+<%@page import="Model.ModelPago"%>
 <%@page import="Model.ModelListProyeccion"%>
-<%@page import="Model.ModelInfoProyeccion"%>
 <%@page import="java.util.List"%>
 <%@page import="Model.ModelCompra"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -41,7 +41,7 @@
                             <% 
                                 ModelListProyeccion proyec = (ModelListProyeccion) request.getAttribute("proyec"); 
                                 ModelCompra compra = (ModelCompra) proyec.getInfoCompra();
-                                List<ModelInfoProyeccion> infoProyec = (List<ModelInfoProyeccion>) proyec.getInfoProyeccion();
+                                List<ModelPago> infoProyec = (List<ModelPago>) proyec.getInfoProyeccion();
                             %>
                             
                             
@@ -93,10 +93,10 @@
 
                                     <%
                                         // Se recupera la variable de session listaUsuario
-                                        for (ModelInfoProyeccion c : infoProyec) {
+                                        for (ModelPago c : infoProyec) {
                                             out.println("<tr>");
-                                            out.println("<td>" + c.getNumero_Couta() + "</td>");
-                                            out.println("<td>" + c.getFecha() + "</td>");
+                                            out.println("<td>" + c.getId_Pago()+ "</td>");
+                                            out.println("<td>" + c.getFecha_de_Pago()+ "</td>");
                                             out.println("<td>" + c.getValor_Saldo() + "</td>");
                                             out.println("<td>" + c.getAbono_Capital() + "</td>");
                                             out.println("<td>" + c.getValor_Interes()  + "</td>");
