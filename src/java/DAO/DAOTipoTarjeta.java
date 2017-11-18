@@ -72,4 +72,53 @@ public class DAOTipoTarjeta extends Conexion{
         return null;  
     }
     
+    public List<ModelTipoTarjeta> SearchByCodigoId(int Codigo_TipoTarjeta) throws SQLException
+    {
+        List<ModelTipoTarjeta> list = new LinkedList<>();
+        
+        Statement st = con.createStatement();
+        ResultSet rs = null;
+        String query = "Select Codigo_TipoTarjeta, Nombre_TipoTarjeta, Acronimo_TipoTarjeta, Interes_TipoTarjeta, PlazoMax_TipoTarjeta, CupoMax_TipoTarjeta, TT.Codigo_Franquicia,"
+                        +" Multa_TipoTarjeta, Acronimo_Franquicia FROM Tipo_Tarjeta TT INNER JOIN franquicia F ON TT.Codigo_Franquicia = F.Codigo_Franquicia";
+        rs = st.executeQuery(query);
+        
+        while (rs.next()) {
+            
+            ModelTipoTarjeta m = new ModelTipoTarjeta();           
+            m.setCodigo_TipoTarjeta(rs.getInt("Codigo_TipoTarjeta"));
+            m.setNombre_TipoTarjeta(rs.getString("Nombre_TipoTarjeta"));
+            m.setAcronimo_TipoTarjeta(rs.getString("Acronimo_TipoTarjeta"));
+            m.setInteres_TipoTarjeta(rs.getDouble("Interes_TipoTarjeta"));
+            m.setPlazoMax_TipoTarjeta(rs.getInt("PlazoMax_TipoTarjeta"));
+            m.setCupoMax_TipoTarjeta(rs.getDouble("CupoMax_TipoTarjeta"));
+            m.setMulta_TipoTarjeta(rs.getDouble("Codigo_Franquicia"));            
+            m.setCodigo_Franquicia(rs.getInt("Multa_TipoTarjeta"));            
+            m.setAcronimo_Franquicia(rs.getString("Acronimo_Franquicia"));
+        
+            list.add(m);
+        }
+        
+        return list;
+    }
+    
+    public boolean ValidateByCodigoId(int Codigo_TipoTarjeta) throws SQLException {
+
+        try {
+
+            Statement st = con.createStatement();
+            ResultSet rs = null;
+            String query = "SELECT * FROM tipo_tarjeta WHERE Codigo_TipoTarjeta =" + Codigo_TipoTarjeta;
+            rs = st.executeQuery(query);
+
+            if (rs.next()) {
+                return true;
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return false;
+    }
+    
 }
