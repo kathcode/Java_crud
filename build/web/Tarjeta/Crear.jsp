@@ -53,7 +53,7 @@
                                 </div> 
                                 
                                 <div class="form-group">
-                                    <label for="formTarjeta">Codigo tarjeta</label>
+                                    <label for="formTarjeta">Código tarjeta</label>
                                     <input type="number" class="form-control" id="Codigo_TipoTarjeta" name="Codigo_TipoTarjeta" placeholder="Codigo Tarjeta">
                                 </div>
                                 <div class="form-group">
@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="formTarjeta">Interes tarjeta</label>
-                                    <input type="number" class="form-control" id="Interes_TipoTarjeta" name="Interes_TipoTarjeta" placeholder="Interes tarjeta"onkeyUp=" return ValNumero(this);" step="0.01" min="0.01" max="0.05">
+                                    <input type="number" class="form-control" id="Interes_TipoTarjeta" name="Interes_TipoTarjeta" placeholder="Interes tarjeta" step="0.01" min="0.05" max="0.1">
                                 </div>
                                 <div class="form-group">
                                     <label for="formTarjeta">Plazo maximo tarjeta</label>

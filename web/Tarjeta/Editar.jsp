@@ -40,40 +40,25 @@
 
                                 <% ModelTipoTarjeta Tarjeta = (ModelTipoTarjeta) request.getAttribute("oldTarjeta"); %>
 
-
-                                <jsp:include page="../TipoTarjeta?opcion=Info" />
-                               
-
                                 <div class="form-group">
-                                    <jsp:include page="../Franquicia?opcion=listarFranquicia" />
-                                    <label for="formUsuario">Codigo Franquicia*</label>
-                                    <select class="form-control" id="TipoUsuario" name="TipoUsuario" >
-                                        <option>Seleccionar</option>
-                                        <% 
-                                            
-                                            List<ModelFranquicias> listFran = (List<ModelFranquicias>) request.getAttribute("listarFranquicia");
-                                            for (ModelFranquicias fran : listFran)
-                                            {
-                                                if(fran.getCodigo_Franquicia() != Tarjeta.getCodigo_Franquicia())
-                                                {
-                                                    out.println("<option value='" + fran.getCodigo_Franquicia() + "' >" + fran.getNombre_Franquicia() + "</option>");
-                                                }
-                                                else
-                                                {
-                                                    out.println("<option value='" + fran.getCodigo_Franquicia() + "' selected >" +  fran.getNombre_Franquicia() + "</option>");
-                                                }
-                                            }
+                                    
+                                    <div class="form-group">
+                                        <label for="formTarjeta">Tipo Tarjeta*</label>                           
+                                        <%
+                                            out.println("<input type='text' class='form-control' id='' name='' value='" + Tarjeta.getAcronimo_Franquicia() + "' placeholder=''readonly >");
+                                        %>
                                         
-                                        %>            
-                                    </select>
+                                        <%
+                                            out.println("<input type='hidden' class='form-control' id='Codigo_Franquicia' name='Codigo_Franquicia' value='" + Tarjeta.getCodigo_Franquicia()+ "' placeholder='Codigo Tipo Tarjeta'readonly >");
+                                        %>
+                                    </div>
+                         
                                 </div>
-
-                                <label for="formTarjeta">Tipo Tarjeta</label>
 
                                 <div class="form-group">
                                     <label for="formTarjeta">Codigo Tarjeta</label>                           
                                     <%
-                                        out.println("<input type='number' class='form-control' id='Codigo_TipoTarjeta' name='Codigo_TipoTarjeta' value='" + Tarjeta.getCodigo_TipoTarjeta() + "' placeholder='Codigo Tipo Tarjeta'>");
+                                        out.println("<input type='number' class='form-control' id='Codigo_TipoTarjeta' name='Codigo_TipoTarjeta' value='" + Tarjeta.getCodigo_TipoTarjeta() + "' placeholder='Codigo Tipo Tarjeta'readonly >");
                                     %>
                                 </div>
                                 <div class="form-group">
@@ -103,7 +88,7 @@
                                 <div class="form-group">
                                     <label for="formTarjeta">Cupo tarjeta</label>                           
                                     <%
-                                        out.println("<input type='number' class='form-control' id='CupoMax_TipoTarjeta' name='CupoMax_TipoTarjeta' value='" + Tarjeta.getCupoMax_TipoTarjeta() + "' placeholder='Cupo Maximo Tipo Tarjeta'>");
+                                        out.println("<input type='number' class='form-control' id='CupoMax_TipoTarjeta' name='CupoMax_TipoTarjeta' value='" + String.format("%.0f", Tarjeta.getCupoMax_TipoTarjeta()) + "' placeholder='Cupo Maximo Tipo Tarjeta'>");
                                     %>
                                 </div>
                                 <div class="form-group">

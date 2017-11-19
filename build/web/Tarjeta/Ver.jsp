@@ -38,7 +38,7 @@
                             <div class="ver-info">
                                 <% ModelTipoTarjeta tarjeta = (ModelTipoTarjeta) request.getAttribute("oldTarjeta"); %>
                                 <div>
-                                    <span>codigo tipo tarjeta </span>
+                                    <span>Código tipo tarjeta </span>
                                     <% out.print(tarjeta.getCodigo_TipoTarjeta());%>  
                                 </div>
                                 <div>
@@ -46,34 +46,36 @@
                                     <% out.print(tarjeta.getNombre_TipoTarjeta());%>  
                                 </div>
                                 <div>
-                                    <span>Acronimo tarjeta </span>
+                                    <span>Acrónimo tarjeta </span>
                                     <% out.print(tarjeta.getAcronimo_TipoTarjeta()); %>  
                                 </div>
+                                <div>
+                                    <span>Acrónimo franquicia </span>
+                                    <% out.print(tarjeta.getAcronimo_Franquicia()); %>  
+                                </div>
                                 <div> 
-                                    <span>interes tarjeta </span>
+                                    <span>Interes tarjeta: </span>
                                     <% out.print(tarjeta.getInteres_TipoTarjeta()); %>  
                                 </div>
                                 <div> 
-                                    <span>Plazo Maximo Tarjeta </span>
+                                    <span>Plazo Maximo Tarjeta: </span>
                                     <% out.print(tarjeta.getPlazoMax_TipoTarjeta()); %>  
                                 </div>
                                 <div> 
                                     <span>Cupo Maximo Tarjeta: </span>
-                                    <% out.print(tarjeta.getCupoMax_TipoTarjeta()); %>  
+                                    <% out.print(String.format("%.0f", tarjeta.getCupoMax_TipoTarjeta())); %>  
                                 </div>
                                 <div> 
                                     <span>Multa Tarjeta: </span>
                                     <% out.print(tarjeta.getMulta_TipoTarjeta()); %>  
                                 </div>
-                                <div> 
-                                    <span>Codigo Franquicia: </span>
-                                    <% out.print(tarjeta.getCodigo_Franquicia());%>  
-                                </div>
                               
                             </div>
 
                             <br/>
-                            <a href="Usuario/Lista.jsp" class="btn btn-primary">Regresar</a>
+                            <div class="ctn-btn-form">
+                                <a href="Tarjeta/Lista.jsp" class="btn btn-primary">Regresar</a>
+                            </div>
 
                         </div>
                     </div>

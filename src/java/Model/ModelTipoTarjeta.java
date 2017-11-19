@@ -14,7 +14,7 @@ public class ModelTipoTarjeta {
     private double Interes_TipoTarjeta;
     private int PlazoMax_TipoTarjeta;
     private double CupoMax_TipoTarjeta;
-    private double Multa_TipoTarjeta;
+    private int Multa_TipoTarjeta;
     private int Codigo_Franquicia;
     private Date Fecha_Creacion;
     
@@ -23,7 +23,7 @@ public class ModelTipoTarjeta {
     public ModelTipoTarjeta() {
     }
 
-    public ModelTipoTarjeta(int Codigo_TipoTarjeta, String Nombre_TipoTarjeta, String Acronimo_TipoTarjeta, double Interes_TipoTarjeta, int PlazoMax_TipoTarjeta, double CupoMax_TipoTarjeta, double Multa_TipoTarjeta, int Codigo_Franquicia) {
+    public ModelTipoTarjeta(int Codigo_TipoTarjeta, String Nombre_TipoTarjeta, String Acronimo_TipoTarjeta, double Interes_TipoTarjeta, int PlazoMax_TipoTarjeta, double CupoMax_TipoTarjeta, int Multa_TipoTarjeta, int Codigo_Franquicia) {
         this.Codigo_TipoTarjeta = Codigo_TipoTarjeta;
         this.Nombre_TipoTarjeta = Nombre_TipoTarjeta;
         this.Acronimo_TipoTarjeta = Acronimo_TipoTarjeta;
@@ -82,11 +82,11 @@ public class ModelTipoTarjeta {
         this.CupoMax_TipoTarjeta = CupoMax_TipoTarjeta;
     }
 
-    public double getMulta_TipoTarjeta() {
+    public int getMulta_TipoTarjeta() {
         return Multa_TipoTarjeta;
     }
 
-    public void setMulta_TipoTarjeta(double Multa_TipoTarjeta) {
+    public void setMulta_TipoTarjeta(int Multa_TipoTarjeta) {
         this.Multa_TipoTarjeta = Multa_TipoTarjeta;
     }
 

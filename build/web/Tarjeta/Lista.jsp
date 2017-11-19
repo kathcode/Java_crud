@@ -59,14 +59,12 @@
                             <table class="table table-hover"> 
                                 <thead> 
                                     <tr> 
-                                        <th>codigo tarjeta</th> 
+                                        <th>Código tarjeta</th> 
                                         <th>Nombre tarjeta</th> 
                                         <th>Acronimo tarjeta</th> 
-                                        <th>Interes tarjeta</th> 
-                                        <th>Plazo tarjeta</th>                                         
-                                        <th>Cupo tarjeta</th> 
-                                        <th>Multa tarjeta</th>
-                                        <th>Codigo Franquicia</th>
+                                        <th>Interes tarjeta</th>                                         
+                                        <th>Cupo tarjeta</th>                                        
+                                        <th>Acrónimo Franquicia</th>
                                         <th>Acciones</th>    
 
                                     </tr> 
@@ -85,9 +83,7 @@
                                             out.println("<td>" + u.getNombre_TipoTarjeta() + "</td>");
                                             out.println("<td>" + u.getAcronimo_TipoTarjeta() + "</td>");
                                             out.println("<td>" + u.getInteres_TipoTarjeta() + "</td>");
-                                            out.println("<td>" + u.getPlazoMax_TipoTarjeta() + "</td>");
-                                            out.println("<td>" + u.getCupoMax_TipoTarjeta() + "</td>");
-                                            out.println("<td>" + u.getMulta_TipoTarjeta() + "</td>");
+                                            out.println("<td>" + String.format("%.0f", u.getCupoMax_TipoTarjeta()) + "</td>");
                                             out.println("<td>" + u.getAcronimo_Franquicia() + "</td>");
                                             out.println("<td><a href= '../TipoTarjeta?opcion=info&Codigo_TipoTarjeta=" + u.getCodigo_TipoTarjeta() + "'> <span class='glyphicon glyphicon-eye-open' aria-hidden='true'></span> Ver </a> "
                                                     + "<a href= '../TipoTarjeta?opcion=edit&Codigo_TipoTarjeta=" + u.getCodigo_TipoTarjeta() + "'> <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Editar </a> "
