@@ -26,7 +26,7 @@ public class DAOCompra extends Conexion{
         List<ModelCompra> list = new LinkedList<>();
         Statement st = con.createStatement();
         ResultSet rs = null;
-        String query = "Select * FROM Compras";
+        String query = "Select * FROM compras";
         rs = st.executeQuery(query);
         
         while (rs.next()){
@@ -50,7 +50,7 @@ public class DAOCompra extends Conexion{
          
         Statement st = con.createStatement();
         ResultSet rs = null;
-        String query = "Select * FROM Compras WHERE Id_Compra = " +  idCompra;
+        String query = "Select * FROM compras WHERE Id_Compra = " +  idCompra;
         rs = st.executeQuery(query);
         
         if(rs.next())
@@ -77,7 +77,7 @@ public class DAOCompra extends Conexion{
         try {
                 
             ResultSet rs = null;
-            String query = "INSERT INTO COMPRAS(Id_Compra,Fecha_Compra, DeudaInicial_Compra, NumeroCuotas_Compra, Descripcion_Compra, Interes_Compra, DeudaActual_Compra, Numero_TarjetaXCliente)" 
+            String query = "INSERT INTO compras(Id_Compra,Fecha_Compra, DeudaInicial_Compra, NumeroCuotas_Compra, Descripcion_Compra, Interes_Compra, DeudaActual_Compra, Numero_TarjetaXCliente)" 
                     + "VALUES(?,?,?,?,?,?,?,?)";
             
             Calendar calendar = Calendar.getInstance();

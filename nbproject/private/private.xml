@@ -2,15 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/Volumes/MaruloSD/Sandbox/Poli/Garantizar/PPI-Proyecto-Bato/src/java/Controller/ControllerTipoTarjeta.java</file>
-            <file>file:/Volumes/MaruloSD/Sandbox/Poli/Garantizar/PPI-Proyecto-Bato/web/Tarjeta/Crear.jsp</file>
-            <file>file:/Volumes/MaruloSD/Sandbox/Poli/Garantizar/PPI-Proyecto-Bato/src/java/DAO/Conexion.java</file>
-            <file>file:/Volumes/MaruloSD/Sandbox/Poli/Garantizar/PPI-Proyecto-Bato/src/java/Controller/ControllerUsuario.java</file>
-            <file>file:/Volumes/MaruloSD/Sandbox/Poli/Garantizar/PPI-Proyecto-Bato/src/java/Model/ModelTipoTarjeta.java</file>
-            <file>file:/Volumes/MaruloSD/Sandbox/Poli/Garantizar/PPI-Proyecto-Bato/web/Usuario/Crear.jsp</file>
-            <file>file:/Volumes/MaruloSD/Sandbox/Poli/Garantizar/PPI-Proyecto-Bato/src/java/DAO/DAOTipoTarjeta.java</file>
-            <file>file:/Volumes/MaruloSD/Sandbox/Poli/Garantizar/PPI-Proyecto-Bato/web/Tarjeta/Lista.jsp</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

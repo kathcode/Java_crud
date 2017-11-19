@@ -27,7 +27,7 @@ public class DAOUsuario extends Conexion{
         
         Statement st = con.createStatement();
         ResultSet rs = null;
-        String query = "SELECT Id_Usuario, Nombre_Usuario, Apellidos_Usuario, Telefono_Usuario, Direccion_Usuario, Email_Usuario, Genero_Usuario, Usuario_Usuario, Nombre_TipoUsuario FROM Tipo_Usuario TU INNER JOIN Usuario U ON TU.Id_TipoUsuario = U.Id_TipoUsuario";
+        String query = "SELECT Id_Usuario, Nombre_Usuario, Apellidos_Usuario, Telefono_Usuario, Direccion_Usuario, Email_Usuario, Genero_Usuario, Usuario_Usuario, Nombre_TipoUsuario FROM tipo_usuario TU INNER JOIN usuario U ON TU.Id_TipoUsuario = U.Id_TipoUsuario";
         rs = st.executeQuery(query);
         
         while (rs.next()) {
@@ -53,7 +53,7 @@ public class DAOUsuario extends Conexion{
         
         try {
             ResultSet rs = null;
-            String query = "INSERT INTO USUARIO(Id_Usuario, Nombre_Usuario, Apellidos_Usuario, Telefono_Usuario, Direccion_Usuario, Email_Usuario, Genero_Usuario, Usuario_Usuario, Password_Usuario, Id_TipoUsuario, Fecha_Creacion)"
+            String query = "INSERT INTO usuario(Id_Usuario, Nombre_Usuario, Apellidos_Usuario, Telefono_Usuario, Direccion_Usuario, Email_Usuario, Genero_Usuario, Usuario_Usuario, Password_Usuario, Id_TipoUsuario, Fecha_Creacion)"
                         + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
             Calendar calendar = Calendar.getInstance();
@@ -87,7 +87,7 @@ public class DAOUsuario extends Conexion{
             
             Statement st = con.createStatement();
             ResultSet rs = null;
-            String query = "SELECT * FROM Usuario WHERE Id_Usuario =" + idUser;
+            String query = "SELECT * FROM usuario WHERE Id_Usuario =" + idUser;
             rs = st.executeQuery(query);
 
             if(rs.next())
@@ -106,7 +106,7 @@ public class DAOUsuario extends Conexion{
     {
         Statement st = con.createStatement();
         ResultSet rs = null;
-        String query = "SELECT * FROM Usuario WHERE Id_Usuario =" + idUser;
+        String query = "SELECT * FROM usuario WHERE Id_Usuario =" + idUser;
         rs = st.executeQuery(query);
         
         if(rs.next()) {
@@ -135,7 +135,7 @@ public class DAOUsuario extends Conexion{
         
         try {
             ResultSet rs = null;
-            String query = "UPDATE USUARIO SET Id_Usuario=?, Nombre_Usuario=?, Apellidos_Usuario=?, Telefono_Usuario=?,"
+            String query = "UPDATE usuario SET Id_Usuario=?, Nombre_Usuario=?, Apellidos_Usuario=?, Telefono_Usuario=?,"
                     + "Direccion_Usuario=?, Email_Usuario=?, Genero_Usuario=?, Usuario_Usuario=?, Password_Usuario=?,"
                     + "Id_TipoUsuario=?, Fecha_Creacion=? WHERE Id_Usuario=?";
 
@@ -165,7 +165,7 @@ public class DAOUsuario extends Conexion{
     {
         try 
         {
-            String query = "DELETE FROM USUARIO WHERE Id_Usuario =?";
+            String query = "DELETE FROM usuario WHERE Id_Usuario =?";
             PreparedStatement preparedStmt = (PreparedStatement) con.prepareStatement(query);
             preparedStmt.setString(1, idUser);
             preparedStmt.executeUpdate();
@@ -182,7 +182,7 @@ public class DAOUsuario extends Conexion{
         
         Statement st = con.createStatement();
         ResultSet rs = null;
-        String query = "SELECT * FROM Usuario WHERE Id_Usuario =" + idUser;
+        String query = "SELECT * FROM usuario WHERE Id_Usuario =" + idUser;
         rs = st.executeQuery(query);
         
         while (rs.next()) {
