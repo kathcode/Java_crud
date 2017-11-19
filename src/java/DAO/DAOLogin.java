@@ -19,7 +19,7 @@ public class DAOLogin extends Conexion{
         
         Statement st = con.createStatement();
         ResultSet rs = null;
-        String query = "Select * from Usuario";
+        String query = "Select * from usuario";
         rs = st.executeQuery(query);
         
         while (rs.next()) {

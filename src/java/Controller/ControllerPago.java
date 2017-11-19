@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Model.ModelProyeccion;
+import Model.ModelPago;
+import Model.ModelCompra;
 import javax.servlet.RequestDispatcher;
 
 /**
@@ -26,7 +27,9 @@ import javax.servlet.RequestDispatcher;
 public class ControllerPago extends HttpServlet {
     private DAOPago dao;
     private static String CREAR_PAGO = "Pago/Crear.jsp";
-    private static String MOSTRAR_PAGO = "Pago/MostrarPago.jsp";
+    private static String MOSTRAR_COMPRA = "Compra/Listar.jsp";
+    private static String MOSTRAR_CUOTA = "Pago/MostrarPago.jsp";
+    private static String LISTAT_PAGOS = "Pago/Listar.jsp";
     
     public ControllerPago() {
         super();
@@ -50,8 +53,15 @@ public class ControllerPago extends HttpServlet {
         String opcion = (String) request.getParameter("opcion");
         
         if (opcion.equals("buscarPago")) {
-            int numero_tarjeta = Integer.parseInt(request.getParameter("numero_tarjeta"));
-            buscarPago(request, response, numero_tarjeta);
+            String numero_tarjeta = request.getParameter("numero_tarjeta");
+            buscarCompraXTarjeta(request, response, numero_tarjeta);
+        } else if (opcion.equals("pagoCuota")) {
+            int idCompra = Integer.parseInt(request.getParameter("idCompra"));
+            infopagos(request, response, idCompra);
+        } else if (opcion.equals("realizarPago")) {
+            int idPago = Integer.parseInt(request.getParameter("idPago"));
+            int valor_pago = Integer.parseInt(request.getParameter("valor_pago"));
+            realizarPago(request, response, idPago, valor_pago);
         }
         
     }
@@ -104,13 +114,29 @@ public class ControllerPago extends HttpServlet {
         return "Short description";
     }// </editor-fold>
     
-    public void buscarPago(HttpServletRequest request, HttpServletResponse response, int numero_tarjeta) throws SQLException, ServletException, IOException {
-        ModelProyeccion proyeccion = dao.getInfoToPay(numero_tarjeta);
+    public void buscarCompraXTarjeta(HttpServletRequest request, HttpServletResponse response, String numero_tarjeta) throws SQLException, ServletException, IOException {
         
         RequestDispatcher vista = null;
-        request.setAttribute("proyeccion", proyeccion);
-        vista = request.getRequestDispatcher(MOSTRAR_PAGO);
+        request.setAttribute("listShoppings", dao.getInfoToPay(numero_tarjeta));
+        vista = request.getRequestDispatcher(MOSTRAR_COMPRA);
         vista.forward(request, response);
     }
     
+    public void infopagos(HttpServletRequest request, HttpServletResponse response, int idCompra) throws SQLException, ServletException, IOException {
+        
+        // Traer la lista de pagos de la compra con este ID
+        RequestDispatcher vista = null;
+        request.setAttribute("pago_cuota", dao.getCuota(idCompra));
+        vista = request.getRequestDispatcher(MOSTRAR_CUOTA);
+        vista.forward(request, response);
+    }
+    
+    public void realizarPago(HttpServletRequest request, HttpServletResponse response, int idPago, int valor_pago) throws SQLException, ServletException, IOException {
+        
+        // Traer la lista de pagos de la compra con este ID
+        RequestDispatcher vista = null;
+        dao.realizarPago(idPago, valor_pago);
+        vista = request.getRequestDispatcher(LISTAT_PAGOS);
+        vista.forward(request, response);
+    }
 }

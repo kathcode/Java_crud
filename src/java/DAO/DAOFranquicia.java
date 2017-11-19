@@ -29,7 +29,7 @@ public class DAOFranquicia extends Conexion {
         
         Statement st = con.createStatement();
         ResultSet rs = null;
-        String sql = "SELECT * FROM FRANQUICIA";
+        String sql = "SELECT * FROM franquicia";
         rs = st.executeQuery(sql);
 
         while (rs.next()) {
@@ -49,7 +49,7 @@ public class DAOFranquicia extends Conexion {
     
     public ModelFranquicias crearFranquicia(ModelFranquicias franquicia) {
         try {
-            String query = "INSERT INTO FRANQUICIA(NOMBRE_FRANQUICIA, ACRONIMO_FRANQUICIA, RANGOPINGMAX_FRANQUICIA, RANGOPINGMIN_FRANQUICIA, FECHA_CREACION"+ ")"
+            String query = "INSERT INTO franquicia(NOMBRE_FRANQUICIA, ACRONIMO_FRANQUICIA, RANGOPINGMAX_FRANQUICIA, RANGOPINGMIN_FRANQUICIA, FECHA_CREACION"+ ")"
                         + "VALUES (?,?,?,?,?)";
 
             Calendar calendar = Calendar.getInstance();
@@ -74,7 +74,7 @@ public class DAOFranquicia extends Conexion {
     
     public ModelFranquicias getFranquiciaByid(int id) throws SQLException {
         Statement st = con.createStatement();
-        String sql = "SELECT * FROM FRANQUICIA WHERE CODIGO_FRANQUICIA=" + id;
+        String sql = "SELECT * FROM franquicia WHERE CODIGO_FRANQUICIA=" + id;
         ResultSet rs = st.executeQuery(sql);
 
         if (rs.next()) {
@@ -97,7 +97,7 @@ public class DAOFranquicia extends Conexion {
         
         try {
             ResultSet rs = null;
-            String query = "UPDATE FRANQUICIA SET NOMBRE_FRANQUICIA=?, ACRONIMO_FRANQUICIA=?, RANGOPINGMAX_FRANQUICIA=?,"
+            String query = "UPDATE franquicia SET NOMBRE_FRANQUICIA=?, ACRONIMO_FRANQUICIA=?, RANGOPINGMAX_FRANQUICIA=?,"
                     + "RANGOPINGMIN_FRANQUICIA=? WHERE CODIGO_FRANQUICIA=?";
 
             PreparedStatement preparedStmt = (PreparedStatement) con.prepareStatement(query);
@@ -119,7 +119,7 @@ public class DAOFranquicia extends Conexion {
     public void eliminarFranquicia(int id) {
         try {
             PreparedStatement preparedStatement = con
-                    .prepareStatement("DELETE FROM FRANQUICIA WHERE CODIGO_FRANQUICIA=?");
+                    .prepareStatement("DELETE FROM franquicia WHERE CODIGO_FRANQUICIA=?");
             // Parameters start with 1
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();

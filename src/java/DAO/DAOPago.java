@@ -12,8 +12,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Calendar;
 
+import Model.ModelPagoCuota;
 import Model.ModelPago;
+import Model.ModelCompra;
 import Model.ModelProyeccion;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.Date;
@@ -24,6 +27,7 @@ import java.util.Calendar;
  * @author esneiderserna
  */
 public class DAOPago extends Conexion {
+    Calendar calendar = Calendar.getInstance();
     
     public void CreatePay(ModelPago model)
     {
@@ -56,25 +60,85 @@ public class DAOPago extends Conexion {
         }
     }
     
-    public ModelProyeccion getInfoToPay(int Id_Tarjeta) throws SQLException {
+    public List<ModelCompra> getInfoToPay(String Id_Tarjeta) throws SQLException {
         try {
+            List<ModelCompra> listaCompras = new LinkedList<>();
             Statement st = con.createStatement();
             ResultSet rs = null;
-            String sql = "SELECT * FROM PROYECCION WHERE ID_TARJETA =" + Id_Tarjeta;
+            String sql = "SELECT * FROM compras where Numero_TarjetaXCliente =" + Id_Tarjeta;
             rs = st.executeQuery(sql);
 
             while(rs.next()) {
-                int id_proyeccion = rs.getInt("id_proyeccion");
-                int id_tarjeta = rs.getInt("id_tarjeta");
-                int valor_cuota = rs.getInt("valor_cuota");
-                int id_compra = rs.getInt("id_Compra");
-
-                ModelProyeccion proyeccion = new ModelProyeccion(id_proyeccion, id_tarjeta, valor_cuota, id_compra);
-                return proyeccion;
+                int Id_Compra = rs.getInt("Id_Compra");
+                Date Fecha_Compra = rs.getDate("Fecha_Compra");
+                int DeudaInicial_Compra = rs.getInt("DeudaInicial_Compra");
+                int NumeroCuotas_Compra = rs.getInt("NumeroCuotas_Compra");
+                String Descripcion_Compra = rs.getString("Descripcion_Compra");
+                double Interes_Compra = rs.getDouble("Interes_Compra");
+                int DeudaActual_Compra = rs.getInt("DeudaActual_Compra");
+                String Numero_TarjetaXCliente = rs.getString("Numero_TarjetaXCliente");
+    
+                ModelCompra compra = new ModelCompra(Id_Compra, Fecha_Compra, DeudaInicial_Compra, NumeroCuotas_Compra, Descripcion_Compra, Interes_Compra, DeudaActual_Compra, Numero_TarjetaXCliente);
+                listaCompras.add(compra);
             }
+            
+            return listaCompras;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return null;
+        }
+    }
+    
+    public ModelPagoCuota getCuota(int id_compra) {
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = null;
+            String sql = "SELECT * FROM programacion_pagos where id_Compra=" + id_compra + " and Estado_Pago=0";
+            rs = st.executeQuery(sql);
+            
+            if (rs.next()) {
+                int valor_cuota = rs.getInt("Valor_Cuota");
+                int id_pago = rs.getInt("id_Pago");
+            
+                Date fecha_actual = new java.sql.Date(calendar.getTime().getTime());
+                Date fecha_pago = rs.getDate("Fecha_de_Pago");
+
+                // date1 < date2, devuelve un valor menor que 0
+                // date2 > date1, devuelve un valor mayor que 0
+                // date1 = date3, se mostrará un 0 en la consola
+
+                int result = fecha_actual.compareTo(fecha_pago);
+
+                if (result > 0) {
+                    valor_cuota = valor_cuota + 10000;
+                }
+
+                ModelPagoCuota pago = new ModelPagoCuota(valor_cuota, id_pago);
+
+                return pago;
+            }
+            
+        } catch (Exception e) {
         }
         return null;
+    }
+    
+    public void realizarPago(int id_pago, int valor_pago) {
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = null;
+            
+            // Actualiza el estado del pago.
+            String sql = "UPDATE programacion_pagos SET Estado_Pago = 1 WHERE id_Pago=" + id_pago;
+            rs = st.executeQuery(sql);
+            
+            // Obtener el cupo actal
+            String sqlConsultatCupo = "SELECT CupoDisp_TarjetaXCliente FROM tarjeta_x_cliente WHERE Numero_TarjetaXCliente=";
+            
+            // Actualizar el copo con el pago
+            String sqlCupo = "UPDATE tarjeta_x_cliente SET CupoDisp_TarjetaXCliente=" +
+            
+        } catch (Exception e) {
+        }
     }
 }
