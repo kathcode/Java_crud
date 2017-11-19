@@ -124,6 +124,21 @@ public class DAOPago extends Conexion {
     }
     
     public void realizarPago(int id_pago, int valor_pago) {
-        
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = null;
+            
+            // Actualiza el estado del pago.
+            String sql = "UPDATE programacion_pagos SET Estado_Pago = 1 WHERE id_Pago=" + id_pago;
+            rs = st.executeQuery(sql);
+            
+            // Obtener el cupo actal
+            String sqlConsultatCupo = "SELECT CupoDisp_TarjetaXCliente FROM tarjeta_x_cliente WHERE Numero_TarjetaXCliente=";
+            
+            // Actualizar el copo con el pago
+            //String sqlCupo = "UPDATE tarjeta_x_cliente SET CupoDisp_TarjetaXCliente=" +
+            
+        } catch (SQLException e) {
+        }
     }
 }

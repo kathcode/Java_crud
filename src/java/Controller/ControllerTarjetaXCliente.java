@@ -27,8 +27,10 @@ import javax.servlet.http.HttpServletResponse;
 public class ControllerTarjetaXCliente extends HttpServlet {
     
     private final DAOTarjetaXCliente DAO = new DAOTarjetaXCliente();
+    private final String VIEW_LISTA = "TarjetaCliente/Lista.jsp";
     private final String VIEW_EDITAR = "TarjetaCliente/Editar.jsp"; 
     private final String VIEW_VER = "TarjetaCliente/Ver.jsp";
+    private final String VIEW_ASIGNAR = "TarjetaCliente/Asignar.jsp";  
     private ModelTarjetaXCliente oldModel = new ModelTarjetaXCliente();
 
     /**
@@ -156,7 +158,7 @@ public class ControllerTarjetaXCliente extends HttpServlet {
             DAOTipoTarjeta daoTipoTarjeta = new DAOTipoTarjeta();
             
             ModelTipoTarjeta mTipoTarjeta = daoTipoTarjeta.GetInfoTypeCard(Integer.parseInt(request.getParameter("TipoTarjeta")));
-            String numberCard = mTipoTarjeta.getCodigo_Franquicia() + mTipoTarjeta.getCodigo_TipoTarjeta() + numberCard();
+            String numberCard =  String.valueOf(mTipoTarjeta.getCodigo_Franquicia()) + String.valueOf(mTipoTarjeta.getCodigo_TipoTarjeta()) + String.valueOf(numberCard());
             
             ModelTarjetaXCliente model = new ModelTarjetaXCliente();
                                  model.setNumero_TarjetaXCliente(numberCard);
@@ -165,16 +167,28 @@ public class ControllerTarjetaXCliente extends HttpServlet {
                                  model.setId_Usuario(request.getParameter("IdClient"));
                                  model.setCodigo_TipoTarjeta(Integer.parseInt(request.getParameter("TipoTarjeta")));
 
+            request.setAttribute("model", model);
+            ModelUsuario mUsuario = daoUsuario.InfoUser(model.getId_Usuario());
+            
+            if(mUsuario != null && mUsuario.getId_TipoUsuario() == 3){
+                
+                if(model.getCupo_TarjetaXCliente() <= mTipoTarjeta.getCupoMax_TipoTarjeta()){
+                    
+                    DAO.CreateCard(model);
+                    response.sendRedirect(VIEW_LISTA);
+                
+                }else{
+                    request.setAttribute("errorMessage", "EL cupo es mayor al permitido a este tipo de tarjeta.");
+                    request.getRequestDispatcher(VIEW_ASIGNAR).forward(request, response);
+                }
 
+            }else{
+                
+                request.setAttribute("errorMessage", "No existe un cliente con la identificación ingresada.");
+                request.getRequestDispatcher(VIEW_ASIGNAR).forward(request, response);
+            }
             
-            
-            //ModelUsuario mUsuario = daoUsuario.InfoUser();
-            
-            
-            
-            
-            
-        } catch (Exception e) {
+        } catch (IOException | NumberFormatException | SQLException | ServletException e) {
         }
         
     }

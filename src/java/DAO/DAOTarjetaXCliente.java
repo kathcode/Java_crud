@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,6 +16,31 @@ import java.util.List;
  */
 public class DAOTarjetaXCliente extends Conexion{
     
+    
+    public void CreateCard(ModelTarjetaXCliente model)
+    {
+        try {
+            ResultSet rs = null;
+            String query = "INSERT INTO tarjeta_x_cliente(Numero_TarjetaXCliente, Cupo_TarjetaXCliente, CupoDisp_TarjetaXCliente, Id_Usuario," 
+                    +"Codigo_TipoTarjeta, Fecha_Creacion)" 
+                    +" VALUES (?,?,?,?,?,?);";
+            
+            Calendar calendar = Calendar.getInstance();
+            Date fecha_creacion = new Date(calendar.getTime().getTime());
+            
+            java.sql.PreparedStatement preparedStmt = (java.sql.PreparedStatement) con.prepareStatement(query);
+            preparedStmt.setString(1, model.getNumero_TarjetaXCliente());
+            preparedStmt.setDouble(2, model.getCupo_TarjetaXCliente());
+            preparedStmt.setDouble(3, model.getCupoDisp_TarjetaXCliente());
+            preparedStmt.setString(4, model.getId_Usuario());
+            preparedStmt.setInt(5, model.getCodigo_TipoTarjeta());
+            preparedStmt.setDate(6, fecha_creacion);
+            
+            preparedStmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     
     public List<ModelTarjetaXCliente> ListCards () throws SQLException
     {
