@@ -136,9 +136,9 @@ public class DAOPago extends Conexion {
             String sqlConsultatCupo = "SELECT CupoDisp_TarjetaXCliente FROM tarjeta_x_cliente WHERE Numero_TarjetaXCliente=";
             
             // Actualizar el copo con el pago
-            String sqlCupo = "UPDATE tarjeta_x_cliente SET CupoDisp_TarjetaXCliente=" +
+            //String sqlCupo = "UPDATE tarjeta_x_cliente SET CupoDisp_TarjetaXCliente=" +
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
     }
 }

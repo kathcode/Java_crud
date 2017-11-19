@@ -4,6 +4,7 @@
     Author     : esneider.serna
 --%>
 
+<%@page import="Model.ModelTarjetaXCliente"%>
 <%@page import="Model.ModelTipoTarjeta"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -34,6 +35,17 @@
 
                     <div class="panel panel-default">
                         <div class="panel-body">
+                            
+                            <% 
+                                String error = (String) request.getAttribute("errorMessage"); 
+                                ModelTarjetaXCliente model = (ModelTarjetaXCliente) request.getAttribute("model");
+                            %>
+                            
+                            <% 
+                                if(error != null){ 
+                                    out.print("<div class='alert alert-danger' role='alert'>"+ error +"</div>"); 
+                                }
+                            %>
 
 
                             <div class="text-required">
@@ -46,7 +58,16 @@
 
                                 <div class="form-group">
                                     <label for="formUsuario">Identificación del cliente*</label>
-                                    <input type='text' class='form-control' id='IdClient' name='IdClient' placeholder='Identificación'>
+                                    
+                                    <% 
+                                        if(model != null){
+                                            out.print("<input type='text' class='form-control' id='IdClient' name='IdClient' value='" + model.getId_Usuario() + "' placeholder='Identificación'>");
+                                        }else{
+                                            out.print("<input type='text' class='form-control' id='IdClient' name='IdClient' placeholder='Identificación'>");
+                                        }
+                                    
+                                    %>
+                                    
                                 </div>
                                 
                                 <div class="form-group">
@@ -60,7 +81,13 @@
                                         <%
                                             List<ModelTipoTarjeta> listTipo = (List<ModelTipoTarjeta>) request.getAttribute("listTipoTarjeta");
                                             for (ModelTipoTarjeta tipo : listTipo) {
-                                                out.println("<option value='" + tipo.getCodigo_TipoTarjeta() + "' >" + tipo.getAcronimo_Franquicia() + " - " + tipo.getAcronimo_TipoTarjeta() + "</option>");
+                                                
+                                                if(model != null){
+                                                    out.println("<option value='" + tipo.getCodigo_TipoTarjeta() + "' selected>" + tipo.getAcronimo_Franquicia() + " - " + tipo.getAcronimo_TipoTarjeta() + "</option>");
+                                                }else{
+                                                    out.println("<option value='" + tipo.getCodigo_TipoTarjeta() + "' >" + tipo.getAcronimo_Franquicia() + " - " + tipo.getAcronimo_TipoTarjeta() + "</option>");
+                                                }
+                                              
                                             }
 
                                         %>            
@@ -70,7 +97,16 @@
                                 
                                 <div class="form-group">
                                     <label for="formUsuario">Cupo de la tarjeta*</label>
-                                    <input type='text' class='form-control' id='IdClient' name='CTarjeta' placeholder='Cupo de la tarjeta'>
+                                    
+                                    <% 
+                                        if(model != null){
+                                            out.print("<input type='text' class='form-control' id='CTarjeta' name='CTarjeta' value='" + String.format("%.0f", model.getCupo_TarjetaXCliente()) + "' placeholder='Cupo de la tarjeta'>");
+                                        }else{
+                                            out.print("<input type='text' class='form-control' id='CTarjeta' name='CTarjeta' placeholder='Cupo de la tarjeta'>");
+                                        }
+                                    
+                                    %>
+
                                 </div>
 
 

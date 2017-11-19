@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,12 @@ import javax.servlet.http.HttpServletResponse;
 public class ControllerTipoTarjeta extends HttpServlet {
     
     private final DAOTipoTarjeta DAO = new DAOTipoTarjeta();
+    private final String VIEW_LISTA = "Tarjeta/Lista.jsp";
+    private final String VIEW_RESULTADO = "Tarjeta/Resultado.jsp";
+    private final String VIEW_EDITAR = "Tarjeta/Editar.jsp";
+    private final String VIEW_CREAR = "Tarjeta/Crear.jsp";
+    private final String VIEW_VER = "Tarjeta/Ver.jsp";
+    private ModelTipoTarjeta oldTarjeta;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,7 +48,18 @@ public class ControllerTipoTarjeta extends HttpServlet {
         
         if(option == null)
         {
-
+            if (request.getParameter("create") != null) {
+                CreateTarjeta(request, response);
+            }
+            
+            if (request.getParameter("search") != null) {
+                SearchTarjeta(request, response);
+            }
+            
+            if(request.getParameter("update") != null)
+            {
+                Update(request, response);
+            }
         }
         else
         {
@@ -50,6 +68,13 @@ public class ControllerTipoTarjeta extends HttpServlet {
                 ListTipoTarjeta(request, response);
             }
             
+            if (option.equals("edit") || option.equals("info")) {
+                InfoTarjeta(request, response);
+            }
+
+            if (option.equals("delete")) {
+                //DeleteTarjeta(request, response);
+            } 
 
         }
     }
@@ -95,15 +120,110 @@ public class ControllerTipoTarjeta extends HttpServlet {
 
     private void ListTipoTarjeta(HttpServletRequest request, HttpServletResponse response) {
         
-        try {
-            
+        try {   
+
             List<ModelTipoTarjeta> listTipoTarjeta = DAO.ListTipoTarjeta();
             request.setAttribute("listTipoTarjeta", listTipoTarjeta);
             
         } catch (SQLException e) {
-            
+            System.out.println(e.getMessage());
         }
+    }
+    
+    private void InfoTarjeta(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        try {
+
+            ModelTipoTarjeta Tarjeta = DAO.GetInfoTypeCard(Integer.parseInt(request.getParameter("Codigo_TipoTarjeta")));
+            RequestDispatcher vista;
+            oldTarjeta = Tarjeta;
+            request.setAttribute("oldTarjeta", Tarjeta);
+
+            if (request.getParameter("opcion").equals("edit")) {
+                vista = request.getRequestDispatcher(VIEW_EDITAR);
+            } else {
+                vista = request.getRequestDispatcher(VIEW_VER);
+            }
+
+            vista.forward(request, response);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+    
+
+
+    private void SearchTarjeta(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        try {
+
+            List<ModelTipoTarjeta> listTarjeta;
+            listTarjeta = DAO.SearchByCodigoId(Integer.parseInt(request.getParameter("Codigo_TipoTarjeta")));
+            request.setAttribute("listTarjeta", listTarjeta);
+
+            RequestDispatcher vista;
+            vista = request.getRequestDispatcher(VIEW_RESULTADO);
+            vista.forward(request, response);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    private void CreateTarjeta(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    
+        try {
+
+            boolean tarjeta = DAO.ValidateByCodigoId(Integer.parseInt(request.getParameter("Codigo_TipoTarjeta")));
+
+            if (!tarjeta) {
+
+                ModelTipoTarjeta newTarjeta = new ModelTipoTarjeta();
+                newTarjeta.setCodigo_TipoTarjeta(Integer.parseInt(request.getParameter("Codigo_TipoTarjeta")));
+                newTarjeta.setNombre_TipoTarjeta(request.getParameter("Nombre_TipoTarjeta"));
+                newTarjeta.setAcronimo_TipoTarjeta(request.getParameter("Acronimo_TipoTarjeta"));
+                newTarjeta.setInteres_TipoTarjeta(Double.parseDouble(request.getParameter("Interes_TipoTarjeta")));
+                newTarjeta.setPlazoMax_TipoTarjeta(Integer.parseInt(request.getParameter("PlazoMax_TipoTarjeta")));
+                newTarjeta.setCupoMax_TipoTarjeta(Double.parseDouble(request.getParameter("CupoMax_TipoTarjeta")));
+                newTarjeta.setMulta_TipoTarjeta(Integer.parseInt(request.getParameter("Multa_TipoTarjeta")));
+                newTarjeta.setCodigo_Franquicia(Integer.parseInt(request.getParameter("Codigo_Franquicia")));
+                
+                DAO.CreateTarjeta(newTarjeta);
+               
+                response.sendRedirect(VIEW_LISTA);
+
+            } else {
+                System.out.println("La tarjeta ya existe en BD");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void Update(HttpServletRequest request, HttpServletResponse response) {
         
+        try {
+            
+            ModelTipoTarjeta newTarjeta = new ModelTipoTarjeta();
+            newTarjeta.setCodigo_TipoTarjeta(Integer.parseInt(request.getParameter("Codigo_TipoTarjeta")));
+            newTarjeta.setNombre_TipoTarjeta(request.getParameter("Nombre_TipoTarjeta"));
+            newTarjeta.setAcronimo_TipoTarjeta(request.getParameter("Acronimo_TipoTarjeta"));
+            newTarjeta.setInteres_TipoTarjeta(Double.parseDouble(request.getParameter("Interes_TipoTarjeta")));
+            newTarjeta.setPlazoMax_TipoTarjeta(Integer.parseInt(request.getParameter("PlazoMax_TipoTarjeta")));
+            newTarjeta.setCupoMax_TipoTarjeta(Double.parseDouble(request.getParameter("CupoMax_TipoTarjeta")));
+            newTarjeta.setMulta_TipoTarjeta(Integer.parseInt(request.getParameter("Multa_TipoTarjeta")));
+            newTarjeta.setCodigo_Franquicia(Integer.parseInt(request.getParameter("Codigo_Franquicia")));
+
+            DAO.UpdateTarjeta(oldTarjeta, newTarjeta);
+            response.sendRedirect(VIEW_LISTA);
+            
+        } catch (Exception e) {
+        }
+    
     }
 
 }
