@@ -24,6 +24,65 @@ function validacionLogin() {
 
 }
 
+function validacionFranquicia () {
+    var nombre = $("#nombre").val();
+    var acronimo = $("#acronimo").val();
+    var min = $("#min").val();
+    var max = $("#max").val();
+    
+    $("#text-error").css("display", "none");
+    
+    if (nombre == "") {
+        $("#text-error").text("*Por favor, ingrese un nombre.");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+    if (acronimo == "") {
+        $("#text-error").text("*Por favor, ingrese un acrónimo.");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+
+    
+    
+    // Validar los rangos de la tarjeta
+    if (min.length != 4 || max.length != 4) {
+        $("#text-error").text("El rango debe ser de 4 cifras");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+    if (min == "") {
+        $("#text-error").text("*Por favor, ingrese un rango mínimo.");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+    if (max == "") {
+        $("#text-error").text("*Por favor, ingrese un rango máximo.");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+    return true;
+}
+
+function validacionBusquedaPago() {
+    debugger
+    var numero = $('#numero_tarjeta_a_buscar').val();
+    
+    $("#text-error").css("display", "none");
+    
+    if (numero == "") {
+        $("#text-error").text("*Por favor, ingrese el número de la tarjeta.");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+    return true;
+}
+
 function validacionUsuario() {
 
     var tUsuario = $("#TipoUsuario").val();

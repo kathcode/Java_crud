@@ -28,14 +28,15 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="col-lg-6">
-                                <form action="../Pago?opcion=buscarPago" method="post">
+                                <form action="../Pago?opcion=buscarPago" onsubmit="return validacionBusquedaPago()" method="post">
                                     <div class="input-group">
-                                        <input type="number" class="form-control" name="numero_tarjeta" placeholder="Numero de tarjeta">
+                                        <input type="number" class="form-control" id="numero_tarjeta_a_buscar" name="numero_tarjeta" placeholder="Número de tarjeta">
                                         <span class="input-group-btn">
                                             <button class="btn btn-default" type="submit" name="search">Buscar tarjeta a pagar</button>
                                         </span>
                                     </div>
                                 </form>
+                                <div id="text-error" class="text-error"></div>
                             </div>
                         </div>
                     </div>
