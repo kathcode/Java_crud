@@ -25,6 +25,10 @@ public class ModelUsuario {
     private String Nombre_TipoUsuario;
     private Date Fecha_Creacion;
 
+    public ModelUsuario(String Id_Usuario, String Nombre_Usuario, String Apellidos_Usuario, String Telefono_Usuario, String Direccion_Usuario, String Email_Usuario, String Genero_Usuario, String Usuario_Usuario, String Password_Usuario, int Id_TipoUsuario) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public String getNombre_TipoUsuario() {
         return Nombre_TipoUsuario;
     }

@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class DAOTipoTarjeta extends Conexion{
     
-    public void CreateTarjeta(ModelTipoTarjeta tipotarjeta)
+    public ModelTipoTarjeta CreateTarjeta(ModelTipoTarjeta tipotarjeta)
     {
         try {
             
@@ -47,9 +47,11 @@ public class DAOTipoTarjeta extends Conexion{
             
             preparedStmt.executeUpdate();
             
+            return tipotarjeta;
+            
         } catch (SQLException e) {
         }
-        
+        return null;
     }
     
     
@@ -60,7 +62,7 @@ public class DAOTipoTarjeta extends Conexion{
         ResultSet rs = null;
         String query = "Select Codigo_TipoTarjeta, Nombre_TipoTarjeta, Acronimo_TipoTarjeta, Interes_TipoTarjeta, PlazoMax_TipoTarjeta, CupoMax_TipoTarjeta, TT.Codigo_Franquicia,"
                 +" Multa_TipoTarjeta, Acronimo_Franquicia, TT.Fecha_Creacion "
-                +" FROM Tipo_Tarjeta TT "
+                +" FROM tipo_tarjeta TT "
                 +"INNER JOIN franquicia F ON TT.Codigo_Franquicia = F.Codigo_Franquicia";
         rs = st.executeQuery(query);
         
@@ -90,7 +92,7 @@ public class DAOTipoTarjeta extends Conexion{
         ResultSet rs = null;
         String query = "Select Codigo_TipoTarjeta, Nombre_TipoTarjeta, Acronimo_TipoTarjeta, Interes_TipoTarjeta, PlazoMax_TipoTarjeta, CupoMax_TipoTarjeta, TT.Codigo_Franquicia, "
                 +"Multa_TipoTarjeta, Acronimo_Franquicia, TT.Fecha_Creacion "
-                +"FROM Tipo_Tarjeta TT " 
+                +"FROM tipo_tarjeta TT " 
                 +"INNER JOIN franquicia F ON TT.Codigo_Franquicia = F.Codigo_Franquicia " 
                 +"WHERE Codigo_TipoTarjeta = " + codigoTarjeta;
         rs = st.executeQuery(query);
@@ -120,7 +122,7 @@ public class DAOTipoTarjeta extends Conexion{
         Statement st = con.createStatement();
         ResultSet rs = null;
         String query = "Select Codigo_TipoTarjeta, Nombre_TipoTarjeta, Acronimo_TipoTarjeta, Interes_TipoTarjeta, PlazoMax_TipoTarjeta, CupoMax_TipoTarjeta, TT.Codigo_Franquicia,"
-                        +" Multa_TipoTarjeta, Acronimo_Franquicia FROM Tipo_Tarjeta TT INNER JOIN franquicia F ON TT.Codigo_Franquicia = F.Codigo_Franquicia";
+                        +" Multa_TipoTarjeta, Acronimo_Franquicia FROM tipo_tarjeta TT INNER JOIN franquicia F ON TT.Codigo_Franquicia = F.Codigo_Franquicia";
         rs = st.executeQuery(query);
         
         while (rs.next()) {

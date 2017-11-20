@@ -19,10 +19,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Esneider
- */
 public class ControllerFranquicia extends HttpServlet {
     
     private static String LISTA_FRANQUICIA = "Franquicia/listarFranquicia.jsp";
@@ -137,6 +133,8 @@ public class ControllerFranquicia extends HttpServlet {
         java.sql.Date fecha_creacion = new java.sql.Date(calendar.getTime().getTime());
         
         Model.ModelFranquicias franquicia = new Model.ModelFranquicias(codigo, nombre, acronimo, max, min, fecha_creacion);
+        
+        dao.validateRango(max, min);
         
         dao.crearFranquicia(franquicia);
      
