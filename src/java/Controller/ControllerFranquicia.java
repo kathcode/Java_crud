@@ -134,6 +134,8 @@ public class ControllerFranquicia extends HttpServlet {
         
         Model.ModelFranquicias franquicia = new Model.ModelFranquicias(codigo, nombre, acronimo, max, min, fecha_creacion);
         
+        dao.validateRango(max, min);
+        
         dao.crearFranquicia(franquicia);
      
         response.sendRedirect(LISTA_FRANQUICIA);

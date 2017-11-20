@@ -47,6 +47,17 @@ public class DAOFranquicia extends Conexion {
         return listaFranquicias;
     }
     
+    public void validateRango(int min, int max) {
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = null;
+            String sql = "SELECT * FROM franquicia where RangoPingMax_Franquicia=" + max + " and RangoPingMin_Franquicia=" + min;
+            rs = st.executeQuery(sql);
+            
+        } catch (Exception e) {
+        }
+    }
+    
     public ModelFranquicias crearFranquicia(ModelFranquicias franquicia) {
         try {
             String query = "INSERT INTO franquicia(NOMBRE_FRANQUICIA, ACRONIMO_FRANQUICIA, RANGOPINGMAX_FRANQUICIA, RANGOPINGMIN_FRANQUICIA, FECHA_CREACION"+ ")"
