@@ -129,5 +129,6 @@
     <script src="${pageContext.request.contextPath}/Lib/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>    
     <script src="${pageContext.request.contextPath}/Js/custom.min.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/Js/validaciones.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/Js/validaciones.js" type="text/javascript"></script>
 
 </html>

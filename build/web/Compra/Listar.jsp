@@ -65,7 +65,6 @@
                                         <th>Valor Actual</th> 
                                         <th>Interes</th>                                         
                                         <th>Acciones</th>
-                                        <th>Pagos</th>
                                     </tr> 
                                 </thead> 
                                 <tbody> 
@@ -84,8 +83,6 @@
                                             out.println("<td>" + c.getDeudaActual_Compra() + "</td>");
                                             out.println("<td>" + c.getInteres_Compra()  + "</td>");
                                             out.println("<td><a href= '../Compra?opcion=proyeccion&idCompra=" + c.getId_Compra()  + "'> <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Proyección </a>   </td>");
-                                            out.println("<td><a href= 'Pago?opcion=pagoCuota&idCompra=" + c.getId_Compra()  + "'> <span class='glyphicon glyphicon-credit-card' aria-hidden='true'></span> Pagar cuota </a>   </td>");
-                                            out.println("<td><a href= 'Pago?opcion=pagoTotal&idCompra=" + c.getId_Compra()  + "'> <span class='glyphicon glyphicon-credit-card' aria-hidden='true'></span> Pago total </a>   </td>");
                                             out.println("</tr>");
                                         }
                                     %>

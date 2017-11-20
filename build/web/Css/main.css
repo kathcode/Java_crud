@@ -64,3 +64,20 @@ body{
     font-style: italic;
     margin-bottom: 15px;
 }
+
+.pago-total{
+    text-align: center;
+    font-size: 26px;
+}
+
+.pago-total span{
+    color:#2a3f54;
+    font-weight: 700;
+}
+
+.text-no-pagos{
+    text-align: center;
+    font-size: 24px;
+    padding-top: 15px;
+    color: #1abb9c;
+}
