@@ -44,7 +44,7 @@
                             <div class="text-required">
                                 Los campos marcados con * son obligatorios
                             </div>
-                            <form action="../Franquicia?opcion=crearFranquicia" onsubmit="return validacionFranquicia()" method="post">
+                            <form action="${pageContext.request.contextPath}/Franquicia?opcion=crearFranquicia" onsubmit="return validacionFranquicia()" method="post">
                                 <div class="form-group">
                                     <label>Nombre*</label>
                                     
@@ -100,13 +100,12 @@
                                         }
                                     %>
                                     
-                                    <input class="form-control" id="max" type="number" placeholder="Ranfo máximo" name="max" id="max" />
                                 </div>
                                 
                                 <div id="text-error" class="text-error"></div>
                                 
                                 <div class="ctn-btn-form">
-                                    <a href="listarFranquicia.jsp" class="btn btn-default">Cancelar</a>
+                                    <a href="${pageContext.request.contextPath}/Franquicia/listarFranquicia.jsp" class="btn btn-default">Cancelar</a>
                                     <button type="submit" class="btn btn-primary">Crear franquicia</button>
                                 </div>
                             </form>
