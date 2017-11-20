@@ -48,7 +48,7 @@ public class DAOUsuario extends Conexion{
         return list;
     }
     
-    public void CreateUser(ModelUsuario user) throws SQLException 
+    public ModelUsuario CreateUser(ModelUsuario user) throws SQLException 
     {
         
         try {
@@ -74,10 +74,12 @@ public class DAOUsuario extends Conexion{
 
             preparedStmt.executeUpdate();
             
+            return user;
+            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        
+        return null;
     }
     
     public boolean ValidateByDocumentId(String idUser) throws SQLException 

@@ -53,7 +53,7 @@
                             </div>
 
 
-                            <form action="${pageContext.request.contextPath}/TarjetaXCliente"  method="post">
+                            <form action="${pageContext.request.contextPath}/TarjetaXCliente" onsubmit="return validateTarjetaxCliente()"  method="post">
 
 
                                 <div class="form-group">
@@ -100,9 +100,9 @@
                                     
                                     <% 
                                         if(model != null){
-                                            out.print("<input type='text' class='form-control' id='CTarjeta' name='CTarjeta' value='" + String.format("%.0f", model.getCupo_TarjetaXCliente()) + "' placeholder='Cupo de la tarjeta'>");
+                                            out.print("<input type='number' class='form-control' id='CTarjeta' name='CTarjeta' value='" + String.format("%.0f", model.getCupo_TarjetaXCliente()) + "' placeholder='Cupo de la tarjeta'>");
                                         }else{
-                                            out.print("<input type='text' class='form-control' id='CTarjeta' name='CTarjeta' placeholder='Cupo de la tarjeta'>");
+                                            out.print("<input type='number' class='form-control' id='CTarjeta' name='CTarjeta' placeholder='Cupo de la tarjeta'>");
                                         }
                                     
                                     %>
@@ -117,6 +117,7 @@
                                     <button type="submit" name="create" class="btn btn-primary">Asignar tarjeta</button>
                                 </div>
                             </form>
+                            <div id="text-error" class="text-error"></div>
                         </div>
                     </div>
                 </div>

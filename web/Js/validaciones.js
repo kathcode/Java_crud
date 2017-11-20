@@ -24,6 +24,33 @@ function validacionLogin() {
 
 }
 
+function validateTarjetaxCliente() {
+    debugger
+    var IdClient = $('#IdClient').val();
+    var TipoTarjeta = $('#TipoTarjeta :selected').text();
+    var CTarjeta = $('#CTarjeta').val();
+    
+    if (IdClient == "") {
+        $("#text-error").text("*Por favor, ingrese la identificación del cliente.");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+    if (TipoTarjeta == "Seleccionar") {
+        $("#text-error").text("*Por favor, seleccione un tipo de tarjeta.");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+    if (CTarjeta == "") {
+        $("#text-error").text("*Por favor, ingrese el cupo de la tarjeta");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+    return true;
+}
+
 function validacionFranquicia () {
     var nombre = $("#nombre").val();
     var acronimo = $("#acronimo").val();
