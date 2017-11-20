@@ -7,6 +7,8 @@ package Controller;
 
 import DAO.DAOTipoTarjeta;
 import Model.ModelTipoTarjeta;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.junit.After;
@@ -15,12 +17,16 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import DAO.Conexion;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author ubikath
  */
-public class ControllerTipoTarjetaTest {
+public class ControllerTipoTarjetaTest extends Conexion {
     private final DAOTipoTarjeta DAO = new DAOTipoTarjeta();
     
     public ControllerTipoTarjetaTest() {
@@ -39,39 +45,40 @@ public class ControllerTipoTarjetaTest {
     }
     
     @After
-    public void tearDown() {
+    public void tearDown() throws SQLException {
+        DropInfo();
     }
 
     /**
-     * Test of getServletInfo method, of class ControllerTipoTarjeta.
+     * Test of CreateTipoTarjeta method, of class ControllerTipoTarjeta.
      */
     @Test
-    public void testGetServletInfo() {
+    public void testCreateTipoTarjeta() {
         
-        int Codigo_TipoTarjeta = 1;
-        String Nombre_TipoTarjeta = "Test";
-        String setAcronimo_TipoTarjeta = "Acronimo_test";
-        double Interes_TipoTarjeta = 2.5;
-        int PlazoMax_TipoTarjeta = 60;
-        double CupoMax_TipoTarjeta = 9000000;
-        int Multa_TipoTarjeta = 20000;
-        int Codigo_Franquicia = 1;
-        
-        ModelTipoTarjeta newTarjeta = new ModelTipoTarjeta();
-        newTarjeta.setCodigo_TipoTarjeta(1);
-        newTarjeta.setNombre_TipoTarjeta("sasas");
-        newTarjeta.setAcronimo_TipoTarjeta("ssas");
-        newTarjeta.setInteres_TipoTarjeta(0.6);
-        newTarjeta.setPlazoMax_TipoTarjeta(60);
-        newTarjeta.setCupoMax_TipoTarjeta(9000000);
-        newTarjeta.setMulta_TipoTarjeta(20000);
-        newTarjeta.setCodigo_Franquicia(1);
+        ModelTipoTarjeta tipo_tarjeta_enviada = new ModelTipoTarjeta();
+        tipo_tarjeta_enviada.setCodigo_TipoTarjeta(31);
+        tipo_tarjeta_enviada.setNombre_TipoTarjeta("nombre");
+        tipo_tarjeta_enviada.setAcronimo_TipoTarjeta("Acronimo");
+        tipo_tarjeta_enviada.setInteres_TipoTarjeta(0.05);
+        tipo_tarjeta_enviada.setPlazoMax_TipoTarjeta(60);
+        tipo_tarjeta_enviada.setCupoMax_TipoTarjeta(9000000);
+        tipo_tarjeta_enviada.setMulta_TipoTarjeta(2000);
+        tipo_tarjeta_enviada.setCodigo_Franquicia(1);
 
-        ModelTipoTarjeta tipo_tarjeta_recibida = DAO.CreateTarjeta(newTarjeta);
-
-        ModelTipoTarjeta tipo_tarjeta_enviada = new ModelTipoTarjeta(Codigo_TipoTarjeta, Nombre_TipoTarjeta, setAcronimo_TipoTarjeta, Interes_TipoTarjeta, PlazoMax_TipoTarjeta, CupoMax_TipoTarjeta, Multa_TipoTarjeta, Codigo_Franquicia);
+        ModelTipoTarjeta tipo_tarjeta_recibida = DAO.CreateTarjeta(tipo_tarjeta_enviada);
         
         assertEquals(tipo_tarjeta_enviada, tipo_tarjeta_recibida);
+    }
+    
+    public void DropInfo() {
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = null;
+            String query = "DELETE FROM tipo_tarjeta WHERE Codigo_TipoTarjeta=31";
+            st.executeUpdate(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(ControllerTipoTarjetaTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
