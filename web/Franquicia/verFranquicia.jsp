@@ -61,8 +61,9 @@
                             </div>
                         </div>
                         
-                        <br/>
-                        <a href="Franquicia/listarFranquicia.jsp" class="btn btn-primary">Regresar</a>
+                        <div class="ctn-btn-form">
+                            <a href="Franquicia/listarFranquicia.jsp" class="btn btn-primary">Regresar</a>
+                        </div>
                                 
                         </div>
                     </div>

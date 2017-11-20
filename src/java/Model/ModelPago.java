@@ -22,6 +22,9 @@ public class ModelPago {
     private boolean Estado_Pago;
     private int Id_Compra;
     private Date Fecha_Realizado;
+    private Date Fecha_Creacion;
+    
+    private int Multa_Mora;
 
     public ModelPago() {
     }
@@ -94,7 +97,7 @@ public class ModelPago {
         this.Nuevo_Saldo = Nuevo_Saldo;
     }
 
-    public boolean isEstado_Pago() {
+    public boolean getEstado_Pago() {
         return Estado_Pago;
     }
 
@@ -117,5 +120,25 @@ public class ModelPago {
     public void setFecha_Realizado(Date Fecha_Realizado) {
         this.Fecha_Realizado = Fecha_Realizado;
     }
+
+    public Date getFecha_Creacion() {
+        return Fecha_Creacion;
+    }
+
+    public void setFecha_Creacion(Date Fecha_Creacion) {
+        this.Fecha_Creacion = Fecha_Creacion;
+    }
+    
+    
+
+    public int getMulta_Mora() {
+        return Multa_Mora;
+    }
+
+    public void setMulta_Mora(int Multa_Mora) {
+        this.Multa_Mora = Multa_Mora;
+    }
+    
+    
 
 }

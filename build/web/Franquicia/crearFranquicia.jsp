@@ -55,11 +55,15 @@
                                     </div>
                                     <input class="form-control" id="max" type="number" placeholder="Ranfo máximo" name="max" id="max" />
                                 </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Crear</button>
+                                
+                                <div id="text-error" class="text-error"></div>
+                                
+                                <div class="ctn-btn-form">
+                                    <a href="listarFranquicia.jsp" class="btn btn-default">Cancelar</a>
+                                    <button type="submit" class="btn btn-primary">Crear franquicia</button>
                                 </div>
                             </form>
-                            <div id="text-error" class="text-error"></div>
+                            
                         </div>
                     </div>
                 </div>

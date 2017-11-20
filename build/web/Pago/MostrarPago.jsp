@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="Model.ModelPago"%>
 <%@page import="Model.ModelPagoCuota"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,24 +26,95 @@
                     <div class="page-header">
                         <h1>Realizar pago</h1>
                     </div>
-
+                                
                     <div class="panel panel-default">
-                        <div class="panel-body text-center">
-                            <div class="ver-info">
-                                <% ModelPagoCuota pago = (ModelPagoCuota) request.getAttribute("pago_cuota"); %>
-                                <form action=<% out.print("../Pago?opcion=realizarPago&idPago=" + pago.getId_pago() + "&valor_pago=" + pago.getValor_a_pagar()); %> method="post">
-                                    <div> 
-                                        <span>Valor a pagar: </span>
-                                        <% out.print(pago.getValor_a_pagar()); %>  
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-primary" type="submit" name="pagar">Pagar</button>
-                                    </div>
-                                </form>
+                        <div class="panel-body">
+                            <table class="table table-hover"> 
+                                <thead> 
+                                    <tr> 
+                                        <th>Id pago</th>
+                                        <th>Fecha de pago</th>
+                                        <th>Valor saldo</th>
+                                        <th>Abono capital</th>
+                                        <th>Valor interes</th>                                        
+                                        <th>Valor Mora</th>
+                                        <th>Valor cuota</th>
+                                        <th>Nuevo saldo</th>
+                                        
+                                    </tr> 
+                                </thead> 
+                                <tbody> 
+
+
+                                    <%
+                                        List<ModelPago> listCuotas = (List<ModelPago>) request.getAttribute("listCuotas");
+                                        
+                                        
+                                        if(listCuotas.size() > 0){
+                                            
+                                            for (ModelPago cuota : listCuotas) {
+                                            
+                                                out.println("<tr>");
+                                                out.println("<td>" + cuota.getId_Pago()+ "</td>");
+                                                out.print("<td>" + cuota.getFecha_de_Pago() + "</td>");
+                                                out.print("<td>" + cuota.getValor_Saldo() + "</td>");
+                                                out.print("<td>" + cuota.getAbono_Capital() + "</td>");
+                                                out.print("<td>" + cuota.getValor_Interes() + "</td>");
+                                                out.print("<td>" + cuota.getMulta_Mora() + "</td>");
+                                                out.print("<td>" + cuota.getValor_Cuota()+ "</td>");
+                                                out.print("<td>" + cuota.getNuevo_Saldo() + "</td>");
+                                                out.println("</tr>");
+
+                                            }
+                                        
+                                        }else{
+                                            out.println("<tr><td colspan ='8'> <div class='text-no-pagos'>¡No tienes pagos pendientes a esta compra!</div>  </td></tr>");
+                                        }
+                                        
+                                        
+                                        
+                                        
+                                    %>
+
+                                </tbody> 
+                            </table>
+                                    
+                            <div class="pago-total">
+
+                                <% 
+                                    if(listCuotas.size() > 0){
+                                    
+                                        double pagoTotal = 0;
+
+                                        for (ModelPago cuota : listCuotas) {
+                                            pagoTotal += cuota.getValor_Cuota();
+                                        }
+                                        
+                                        out.print("<span> Pago total: " + pagoTotal + "</span>");
+                                    }
+                                %>
                             </div>
+                            
+                            
                         </div>
+                    </div>            
+                                
+                    <div class="ctn-btn-form">
+                        <a href="Pago/Crear.jsp" class="btn btn-default">Cancelar</a>
+                        <%
+                            if(listCuotas.size() > 0){
+                                boolean isTotal = false;
+                            
+                                if(listCuotas.size() > 1){
+                                    isTotal = true;
+                                }
+                            
+                                out.println("<a href= 'Pago?opcion=realizarPago&idPago=" + listCuotas.get(0).getId_Pago() + "&pagoTotal=" + isTotal + "' class='btn btn-primary'>Pagar cuota</a>");
+                            }
+                        %>
                     </div>
-                </div>Información de pago
+                                    
+                </div>
 
             </div>
         </div>

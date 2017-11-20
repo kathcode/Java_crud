@@ -122,7 +122,9 @@ public class DAOTipoTarjeta extends Conexion{
         Statement st = con.createStatement();
         ResultSet rs = null;
         String query = "Select Codigo_TipoTarjeta, Nombre_TipoTarjeta, Acronimo_TipoTarjeta, Interes_TipoTarjeta, PlazoMax_TipoTarjeta, CupoMax_TipoTarjeta, TT.Codigo_Franquicia,"
-                        +" Multa_TipoTarjeta, Acronimo_Franquicia FROM tipo_tarjeta TT INNER JOIN franquicia F ON TT.Codigo_Franquicia = F.Codigo_Franquicia";
+                +" Multa_TipoTarjeta, Acronimo_Franquicia FROM tipo_tarjeta TT "
+                +"INNER JOIN franquicia F ON TT.Codigo_Franquicia = F.Codigo_Franquicia "
+                +"WHERE Codigo_TipoTarjeta = " + Codigo_TipoTarjeta;
         rs = st.executeQuery(query);
         
         while (rs.next()) {
