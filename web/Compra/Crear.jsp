@@ -129,7 +129,7 @@
                                 <div id="text-error" class="text-error"></div>
                                 
                                 <div class="ctn-btn-form">
-                                    <a href="Lista.jsp" class="btn btn-default">Cancelar</a>
+                                    <a href="Listar.jsp" class="btn btn-default">Cancelar</a>
                                     <button type="submit" name="create" class="btn btn-primary">Crear compra</button>
                                 </div>
                             </form>

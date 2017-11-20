@@ -252,6 +252,17 @@ function validacionCompra() {
     return true;
 }
 
+function validacionBuscarPago(){
+    var nTarjeta = $("#numero_tarjeta").val();
+    
+    if (nTarjeta == "" || nTarjeta == " "){
+        $("#text-error").text("*Por favor, ingrese el número de la tarjeta.");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+    return true
+}
 
 
 function validatePass(pass) {

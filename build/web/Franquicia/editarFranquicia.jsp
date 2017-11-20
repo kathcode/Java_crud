@@ -7,10 +7,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Editar Franquicia</title>
-        <link href="Lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>        
-        <link href="Lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-        <link href="Css/custom.min.css" rel="stylesheet" type="text/css"/>
-        <link href="Css/main.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/Lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>        
+        <link href="${pageContext.request.contextPath}/Lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/Css/custom.min.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/Css/main.css" rel="stylesheet" type="text/css"/>
     </head>
 
     <body class="nav-md">
@@ -55,7 +55,9 @@
                                         out.println("<input type='text' class='form-control' id='max' name='max' value='" + franquicia.getRangoPingMax_Franquicia() + "' placeholder='Identificación'>");
                                     %>
                                 </div>
-                                <div class="form-group">
+                                
+                                <div class="ctn-btn-form">
+                                    <a href="${pageContext.request.contextPath}/Franquicia/listarFranquicia.jsp" class="btn btn-default">Cancelar</a>
                                     <button type="submit" class="btn btn-primary">Guardar</button>
                                 </div>
                             </form>
@@ -69,9 +71,9 @@
     </body>
 
 
-    <script src="Js/jquery-3.2.1.min.js" type="text/javascript"></script>
-    <script src="Lib/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>    
-    <script src="Js/custom.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/Js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/Lib/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>    
+    <script src="${pageContext.request.contextPath}/Js/custom.min.js" type="text/javascript"></script>
 
 
 </html>

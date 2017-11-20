@@ -23,7 +23,7 @@ public class DAOTipoUsuario extends Conexion{
         List<ModelTipousuario> list =  new LinkedList<>();
         Statement st = con.createStatement();
         ResultSet rs = null;
-        String query = "Select * from tipo_tsuario";
+        String query = "Select * from tipo_usuario";
         rs = st.executeQuery(query);
         
         while(rs.next())

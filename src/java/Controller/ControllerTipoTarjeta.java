@@ -161,7 +161,7 @@ public class ControllerTipoTarjeta extends HttpServlet {
 
             List<ModelTipoTarjeta> listTarjeta;
             listTarjeta = DAO.SearchByCodigoId(Integer.parseInt(request.getParameter("Codigo_TipoTarjeta")));
-            request.setAttribute("listTarjeta", listTarjeta);
+            request.setAttribute("listTipoTarjeta", listTarjeta);
 
             RequestDispatcher vista;
             vista = request.getRequestDispatcher(VIEW_RESULTADO);

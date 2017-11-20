@@ -4,6 +4,7 @@
     Author     : esneiderserna
 --%>
 
+<%@page import="Model.ModelCompra"%>
 <%@page import="Model.ModelPago"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -32,26 +33,7 @@
                 <div class="right_col" role="main">
 
                     <div class="page-header">
-                        <h1>Lista de pagos</h1>
-                    </div>
-
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="col-lg-6">
-                                <form action="../Usuario" method="post">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="IdUsuario" placeholder="Compra">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="submit" name="search">Buscar</button>
-                                        </span>
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div class="col-md-6">
-                                <a href="Crear.jsp" class="btn btn-primary pull-right">Crear pago</a>
-                            </div>
-                        </div>
+                        <h1>Lista de compras por tarjeta</h1>
                     </div>
 
                     <div class="panel panel-default">
@@ -59,45 +41,50 @@
                             <table class="table table-hover"> 
                                 <thead> 
                                     <tr> 
-                                        <th>Id pago</th>;
-                                        <th>Fecha de pago</th>
-                                        <th>Valor saldo</th>
-                                        <th>Abono capital</th>
-                                        <th>Valor interes</th>
-                                        <th>Valor cuota</th>
-                                        <th>Nuevo saldo</th>
-                                        <th>Estado de pago</th>
-                                        <th>Id de compra</th>
-                                        <th>Fecha de pago realizado</th>
+                                        <th>Descripción</th> 
+                                        <th>Fecha</th> 
+                                        <th>Valor Compra</th> 
+                                        <th>Valor Actual</th> 
+                                        <th>Interes</th>                                         
+                                        <th colspan="2">Pagos</th>
                                     </tr> 
                                 </thead> 
                                 <tbody> 
 
-                                    <jsp:include page="../Pago?opcion=listarPagos" />
-
 
                                     <%
-                                        List<ModelPago> listShoppings = (List<ModelPago>) request.getAttribute("listPays");
-                                        for (ModelPago p : listShoppings) {
-                                            out.println("<tr>");
-                                            out.println("<td>" + p.getId_Pago() + "</td>");
-                                            out.print("<td>" + p.getFecha_de_Pago() + "</td>");
-                                            out.print("<td>" + p.getValor_Saldo() + "</td>");
-                                            out.print("<td>" + p.getAbono_Capital() + "</td>");
-                                            out.print("<td>" + p.getValor_Interes() + "</td>");
-                                            out.print("<td>" + p.getValor_Cuota() + "</td>");
-                                            out.print("<td>" + p.getNuevo_Saldo() + "</td>");
-                                            out.print("<td>" + p.isEstado_Pago() + "</td>");
-                                            out.print("<td>" + p.getId_Compra() + "</td>");
-                                            out.print("<td>" + p.getFecha_Realizado() + "</td>");
-                                            out.println("<td><a href= 'Pago?opcion=pagoCuota&idCompra=" + p.getId_Pago()  + "'> <span class='glyphicon glyphicon-credit-card' aria-hidden='true'></span> Pagar cuota </a>   </td>");
-                                            out.println("<td><a href= 'Pago?opcion=pagoTotal&idCompra=" + p.getId_Pago()  + "'> <span class='glyphicon glyphicon-credit-card' aria-hidden='true'></span> Pago total </a>   </td>");
-                                            out.println("</tr>");
+                                        // Se recupera la variable de session listaUsuario
+                                        
+                                        List<ModelCompra> listShoppings = (List<ModelCompra>) request.getAttribute("listShoppings");
+                                        
+                                        if(listShoppings.size() > 0){
+                                        
+                                            for (ModelCompra c : listShoppings) {
+                                                out.println("<tr>");
+                                                out.println("<td>" + c.getDescripcion_Compra() + "</td>");
+                                                out.println("<td>" + c.getFecha_Compra() + "</td>");
+                                                out.println("<td>" + c.getDeudaInicial_Compra() + "</td>");
+                                                out.println("<td>" + c.getDeudaActual_Compra() + "</td>");
+                                                out.println("<td>" + c.getInteres_Compra()  + "</td>");
+                                                out.println("<td><a href= 'Pago?opcion=pagoCuota&idCompra=" + c.getId_Compra()  + "'> <span class='glyphicon glyphicon-credit-card' aria-hidden='true'></span> Pagar cuota </a>   </td>");
+                                                out.println("<td><a href= 'Pago?opcion=pagoTotal&idCompra=" + c.getId_Compra()  + "'> <span class='glyphicon glyphicon-credit-card' aria-hidden='true'></span> Pago total </a>   </td>");
+                                                out.println("</tr>");
+                                            }
+                                       
+                                        }else{
+                                            out.println("<tr><td colspan ='7'> <div class='text-no-pagos'>¡No tienes compras pendientes con esta tarjeta!</div>  </td></tr>");
                                         }
+                                        
+
                                     %>
 
                                 </tbody> 
                             </table>
+                                    
+                                    
+                            <div class="ctn-btn-form">
+                                <a href="${pageContext.request.contextPath}/Pago/Crear.jsp" class="btn btn-default">Regresar</a>
+                            </div>
                         </div>
                     </div>
 

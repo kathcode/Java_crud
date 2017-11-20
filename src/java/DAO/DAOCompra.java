@@ -63,6 +63,7 @@ public class DAOCompra extends Conexion{
             m.setDescripcion_Compra(rs.getString("Descripcion_Compra"));
             m.setInteres_Compra(rs.getDouble("Interes_Compra"));
             m.setDeudaActual_Compra(rs.getInt("DeudaActual_Compra"));
+            m.setNumero_TarjetaXCliente(rs.getString("Numero_TarjetaXCliente"));
             return m;
         }
         

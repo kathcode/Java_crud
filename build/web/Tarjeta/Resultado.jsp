@@ -13,10 +13,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Resultado busqueda</title>
-        <link href="Lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>        
-        <link href="Lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-        <link href="Css/custom.min.css" rel="stylesheet" type="text/css"/>
-        <link href="Css/main.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/Lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>        
+        <link href="${pageContext.request.contextPath}/Lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/Css/custom.min.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/Css/main.css" rel="stylesheet" type="text/css"/>
     </head>
 
     <body class="nav-md">
@@ -35,11 +35,11 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="col-lg-6">
-                                <form action="../Tarjeta" method="post">
+                                <form action="${pageContext.request.contextPath}/TipoTarjeta" method="post">
                                     <div class="input-group">
-                                        <input type="number" class="form-control" name="Codigo_TipoTarjeta" placeholder="Codigo Tarjeta">
+                                        <input type="number" class="form-control" name="Codigo_TipoTarjeta"  id="Codigo_TipoTarjeta2" placeholder="Codigo Tipo Tarjeta">
                                         <span class="input-group-btn">
-                                            <button class="btn btn-default" type="submit" name="search">Buscar</button>
+                                            <button class="btn btn-default" type="submit"  id="search" name="search">Buscar</button>
                                         </span>
                                     </div>
                                 </form>
@@ -99,9 +99,9 @@
     </body>
 
 
-    <script src="Js/jquery-3.2.1.min.js" type="text/javascript"></script>
-    <script src="Lib/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>    
-    <script src="Js/custom.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/Js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/Lib/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>    
+    <script src="${pageContext.request.contextPath}/Js/custom.min.js" type="text/javascript"></script>
 
 </html>
 
