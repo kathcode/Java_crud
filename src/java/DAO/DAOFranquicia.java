@@ -58,6 +58,35 @@ public class DAOFranquicia extends Conexion {
         }
     }
     
+    
+    public ModelFranquicias GetLast(){
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = null;
+            String sql = "SELECT * FROM franquicia ORDER BY ID DESC LIMIT 1";
+            rs = st.executeQuery(sql);
+            
+            if (rs.next()) {
+                Integer codigo_franquicia = rs.getInt("CODIGO_FRANQUICIA");
+                String nombre = rs.getString("NOMBRE_FRANQUICIA");
+                String acronimo = rs.getString("ACRONIMO_FRANQUICIA");
+                int rango_max = rs.getInt("RANGOPINGMAX_FRANQUICIA");
+                int rango_min = rs.getInt("RANGOPINGMIN_FRANQUICIA");
+                Date date = rs.getDate("FECHA_CREACION");
+
+                ModelFranquicias f = new ModelFranquicias(codigo_franquicia, nombre, acronimo, rango_max, rango_min, date);
+                return f;
+            }
+            
+            
+        } catch (SQLException e) {
+            
+        }
+        
+        return null;
+        
+    }
+    
     public ModelFranquicias crearFranquicia(ModelFranquicias franquicia) {
         try {
             String query = "INSERT INTO franquicia(NOMBRE_FRANQUICIA, ACRONIMO_FRANQUICIA, RANGOPINGMAX_FRANQUICIA, RANGOPINGMIN_FRANQUICIA, FECHA_CREACION"+ ")"

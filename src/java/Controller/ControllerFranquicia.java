@@ -125,20 +125,39 @@ public class ControllerFranquicia extends HttpServlet {
     
     protected void crearFranquicia(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException
     {
-        Integer codigo = CodigoFranquicia + 1;
-        String nombre = request.getParameter("nombre");
-        String acronimo = request.getParameter("acronimo");
-        int max = Integer.parseInt(request.getParameter("max"));
-        int min = Integer.parseInt(request.getParameter("min"));
-        java.sql.Date fecha_creacion = new java.sql.Date(calendar.getTime().getTime());
         
-        Model.ModelFranquicias franquicia = new Model.ModelFranquicias(codigo, nombre, acronimo, max, min, fecha_creacion);
+        try {
+            
+            Integer codigo = CodigoFranquicia + 1;
+            String nombre = request.getParameter("nombre");
+            String acronimo = request.getParameter("acronimo");
+            int max = Integer.parseInt(request.getParameter("max"));
+            int min = Integer.parseInt(request.getParameter("min"));
+            java.sql.Date fecha_creacion = new java.sql.Date(calendar.getTime().getTime());
+            Model.ModelFranquicias franquicia = new Model.ModelFranquicias(codigo, nombre, acronimo, max, min, fecha_creacion);
+            
+            ModelFranquicias lastFran = dao.GetLast();
+            
+            if(lastFran.getRangoPingMax_Franquicia() < franquicia.getRangoPingMin_Franquicia()){
+                
+                dao.validateRango(max, min);
+                dao.crearFranquicia(franquicia);
+                response.sendRedirect(LISTA_FRANQUICIA);
+            
+            }else{
+                
+                request.setAttribute("franquicia", franquicia);           
+                request.setAttribute("errorMessage", "El pin mínimo de la franquicia debe se mayo a " + lastFran.getRangoPingMax_Franquicia());
+                request.getRequestDispatcher(CREAR_FRANQUICIA).forward(request, response);
+            
+            }
+            
+            
+            
+        } catch (Exception e) {
+        }
         
-        dao.validateRango(max, min);
         
-        dao.crearFranquicia(franquicia);
-     
-        response.sendRedirect(LISTA_FRANQUICIA);
     }
     
     private void actualizarFranquicia(HttpServletRequest request, HttpServletResponse response) throws IOException 
