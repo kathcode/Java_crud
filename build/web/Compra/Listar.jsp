@@ -37,7 +37,7 @@
 
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <div class="col-lg-6">
+                            <!--<div class="col-lg-6">
                                 <form action="../Usuario" method="post">
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="IdUsuario" placeholder="Compra">
@@ -46,9 +46,9 @@
                                         </span>
                                     </div>
                                 </form>
-                            </div>
+                            </div>-->
 
-                            <div class="col-md-6">
+                            <div class="col-md-6 pull-right">
                                 <a href="Crear.jsp" class="btn btn-primary pull-right">Crear compra</a>
                             </div>
                         </div>
