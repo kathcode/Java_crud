@@ -27,39 +27,85 @@
                         <h1>Crear franquicia</h1>
                     </div>
                     
+                    
                     <div class="panel panel-default">
                         <div class="panel-body">
+                            
+                            <%
+                                
+                                String error = (String) request.getAttribute("errorMessage");
+                                if (error != null) {
+                                    out.print("<div class='alert alert-danger' role='alert'>" + error + "</div>");
+                                }
+                                
+                                ModelFranquicias model = (ModelFranquicias) request.getAttribute("franquicia");
+                            %>
+                            
                             <div class="text-required">
                                 Los campos marcados con * son obligatorios
                             </div>
-                            <form action="../Franquicia?opcion=crearFranquicia" onsubmit="return validacionFranquicia()" method="post">
+                            <form action="${pageContext.request.contextPath}/Franquicia?opcion=crearFranquicia" onsubmit="return validacionFranquicia()" method="post">
                                 <div class="form-group">
                                     <label>Nombre*</label>
-                                    <input class="form-control" id="nombre" type="text" placeholder="Nombre" name="nombre" id="nombre" /> 
+                                    
+                                    <% 
+                                        if(model != null){
+                                            out.print("<input type='text' class='form-control' id='nombre' name='nombre' placeholder='Nombre' value='"+ model.getNombre_Franquicia() +"'>");
+                                        }else{
+                                            out.print("<input type='text' class='form-control' id='nombre' name='nombre' placeholder='Nombre'>");
+                                        }
+                                    %>
+                                    
+                                
                                 </div>
                                 <div class="form-group">
                                     <label>Acrónimo*</label>
-                                    <input class="form-control" id="acronimo" type="text" placeholder="Acrónimo" name="acronimo" id="acronimo" />
+                                    
+                                    <% 
+                                        if(model != null){
+                                            out.print("<input type='text' class='form-control' id='acronimo' name='acronimo' placeholder='Nombre' value='"+ model.getAcronimo_Franquicia()+"'>");
+                                        }else{
+                                            out.print("<input type='text' class='form-control' id='acronimo' name='acronimo' placeholder='Acrónimo'>");
+                                        }
+                                    %>
+
                                 </div>
                                 <div class="form-group">
                                     <label>Rango de pin Mínimo*</label>
                                     <div class="text-required">
                                         Debe ser de 4 cifras
                                     </div>
-                                    <input class="form-control" id="min" type="number" placeholder="Rango mínimo" name="min" id="min" />
+                                    
+                                    
+                                    <% 
+                                        if(model != null){
+                                            out.print("<input type='text' class='form-control' id='min' name='min' placeholder='Rango mínimo' value='"+ model.getRangoPingMin_Franquicia() +"' onkeypress='return isNumberKey(event)'>");
+                                        }else{
+                                            out.print("<input type='text' class='form-control' id='min' name='min' placeholder='Rango mínimo' onkeypress='return isNumberKey(event)'>");
+                                        }
+                                    %>
+
                                 </div>
                                 <div class="form-group">
                                     <label>Rango de pin Máximo*</label>
                                     <div class="text-required">
                                         Debe ser de 4 cifras
                                     </div>
-                                    <input class="form-control" id="max" type="number" placeholder="Ranfo máximo" name="max" id="max" />
+                                    
+                                    <% 
+                                        if(model != null){
+                                            out.print("<input type='text' class='form-control' id='max' name='max' placeholder='Ranfo máximo' value='"+ model.getRangoPingMax_Franquicia() +"' onkeypress='return isNumberKey(event)'>");
+                                        }else{
+                                            out.print("<input type='text' class='form-control' id='max' name='max' placeholder='Ranfo máximo' onkeypress='return isNumberKey(event)'>");
+                                        }
+                                    %>
+                                    
                                 </div>
                                 
                                 <div id="text-error" class="text-error"></div>
                                 
                                 <div class="ctn-btn-form">
-                                    <a href="listarFranquicia.jsp" class="btn btn-default">Cancelar</a>
+                                    <a href="${pageContext.request.contextPath}/Franquicia/listarFranquicia.jsp" class="btn btn-default">Cancelar</a>
                                     <button type="submit" class="btn btn-primary">Crear franquicia</button>
                                 </div>
                             </form>
