@@ -73,7 +73,7 @@ public class ControllerTipoTarjeta extends HttpServlet {
             }
 
             if (option.equals("delete")) {
-                //DeleteTarjeta(request, response);
+                DeleteTarjeta(request, response);
             } 
 
         }
@@ -224,6 +224,17 @@ public class ControllerTipoTarjeta extends HttpServlet {
         } catch (Exception e) {
         }
     
+    }
+
+    private void DeleteTarjeta(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            
+            DAO.DeleteTarjeta(Integer.parseInt(request.getParameter("Codigo_TipoTarjeta")));
+            response.sendRedirect(VIEW_LISTA);
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }

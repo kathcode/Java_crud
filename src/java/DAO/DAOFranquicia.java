@@ -63,7 +63,7 @@ public class DAOFranquicia extends Conexion {
         try {
             Statement st = con.createStatement();
             ResultSet rs = null;
-            String sql = "SELECT * FROM franquicia ORDER BY ID DESC LIMIT 1";
+            String sql = "SELECT * FROM franquicia ORDER BY Codigo_Franquicia DESC LIMIT 1";
             rs = st.executeQuery(sql);
             
             if (rs.next()) {
@@ -89,17 +89,18 @@ public class DAOFranquicia extends Conexion {
     
     public ModelFranquicias crearFranquicia(ModelFranquicias franquicia) {
         try {
-            String query = "INSERT INTO franquicia(NOMBRE_FRANQUICIA, ACRONIMO_FRANQUICIA, RANGOPINGMAX_FRANQUICIA, RANGOPINGMIN_FRANQUICIA, FECHA_CREACION"+ ")"
-                        + "VALUES (?,?,?,?,?)";
+            String query = "INSERT INTO franquicia(Codigo_Franquicia, Nombre_Franquicia, Acronimo_Franquicia, RangoPingMax_Franquicia, RangoPingMin_Franquicia, Fecha_Creacion)"
+                        + "VALUES (?,?,?,?,?,?)";
 
             Calendar calendar = Calendar.getInstance();
             
             PreparedStatement preparedStmt = (PreparedStatement) con.prepareStatement(query);
-            preparedStmt.setString(1, franquicia.getNombre_Franquicia());
-            preparedStmt.setString(2, franquicia.getAcronimo_Franquicia());
-            preparedStmt.setInt(3, franquicia.getRangoPingMax_Franquicia());
-            preparedStmt.setInt(4, franquicia.getRangoPingMin_Franquicia());
-            preparedStmt.setDate(5, (java.sql.Date) franquicia.getFecha_Creacion());
+            preparedStmt.setInt(1, 0);
+            preparedStmt.setString(2, franquicia.getNombre_Franquicia());
+            preparedStmt.setString(3, franquicia.getAcronimo_Franquicia());
+            preparedStmt.setInt(4, franquicia.getRangoPingMax_Franquicia());
+            preparedStmt.setInt(5, franquicia.getRangoPingMin_Franquicia());
+            preparedStmt.setDate(6, (java.sql.Date) franquicia.getFecha_Creacion());
 
             preparedStmt.executeUpdate();
             
