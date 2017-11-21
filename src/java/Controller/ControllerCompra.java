@@ -163,6 +163,11 @@ public class ControllerCompra extends HttpServlet {
             int vSaldo = compra.getDeudaInicial_Compra();
             
             Calendar calendar = Calendar.getInstance();
+            
+            if(compra.getFecha_Compra() == null)
+            {
+                compra.setFecha_Compra(Calendar.getInstance().getTime());
+            }
 
 
             proyection.setInfoCompra(compra);
