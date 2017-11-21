@@ -5,7 +5,9 @@
  */
 package Controller;
 
+import DAO.DAOFranquicia;
 import DAO.DAOTipoTarjeta;
+import Model.ModelFranquicias;
 import Model.ModelTipoTarjeta;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -173,15 +175,13 @@ public class ControllerTipoTarjeta extends HttpServlet {
 
     }
 
-    private void CreateTarjeta(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void CreateTarjeta(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
     
         try {
 
             boolean tarjeta = DAO.ValidateByCodigoId(Integer.parseInt(request.getParameter("Codigo_TipoTarjeta")));
-
-            if (!tarjeta) {
-
-                ModelTipoTarjeta newTarjeta = new ModelTipoTarjeta();
+            
+            ModelTipoTarjeta newTarjeta = new ModelTipoTarjeta();
                 newTarjeta.setCodigo_TipoTarjeta(Integer.parseInt(request.getParameter("Codigo_TipoTarjeta")));
                 newTarjeta.setNombre_TipoTarjeta(request.getParameter("Nombre_TipoTarjeta"));
                 newTarjeta.setAcronimo_TipoTarjeta(request.getParameter("Acronimo_TipoTarjeta"));
@@ -190,14 +190,31 @@ public class ControllerTipoTarjeta extends HttpServlet {
                 newTarjeta.setCupoMax_TipoTarjeta(Double.parseDouble(request.getParameter("CupoMax_TipoTarjeta")));
                 newTarjeta.setMulta_TipoTarjeta(Integer.parseInt(request.getParameter("Multa_TipoTarjeta")));
                 newTarjeta.setCodigo_Franquicia(Integer.parseInt(request.getParameter("Codigo_Franquicia")));
+            
+            if (!tarjeta) {
                 
-                DAO.CreateTarjeta(newTarjeta);
-               
-                response.sendRedirect(VIEW_LISTA);
+                DAOFranquicia df = new DAOFranquicia();
+                ModelFranquicias mf = df.getFranquiciaByid(Integer.parseInt(request.getParameter("Codigo_Franquicia")));
 
+                if(newTarjeta.getCodigo_TipoTarjeta()>= mf.getRangoPingMin_Franquicia() && newTarjeta.getCodigo_TipoTarjeta() <= mf.getRangoPingMax_Franquicia()){
+                  
+                    DAO.CreateTarjeta(newTarjeta);
+                    response.sendRedirect(VIEW_LISTA);
+                    
+                }else{
+                    request.setAttribute("newTarjeta", newTarjeta);
+                    request.setAttribute("errorMessage","El codigo de la tarjeta debe estar entre: " + mf.getRangoPingMin_Franquicia() + " - " + mf.getRangoPingMax_Franquicia());
+                    request.getRequestDispatcher(VIEW_CREAR).forward(request, response);
+                }
+                
             } else {
-                System.out.println("La tarjeta ya existe en BD");
+                
+                request.setAttribute("newTarjeta", newTarjeta);
+                request.setAttribute("errorMessage","Ya existe una tarjeta con el codigo ingresado.");
+                request.getRequestDispatcher(VIEW_CREAR).forward(request, response);
             }
+            
+            
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
