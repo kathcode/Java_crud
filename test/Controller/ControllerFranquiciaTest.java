@@ -5,9 +5,15 @@
  */
 package Controller;
 
+import DAO.Conexion;
 import DAO.DAOFranquicia;
 import Model.ModelFranquicias;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.junit.After;
@@ -21,7 +27,7 @@ import static org.junit.Assert.*;
  *
  * @author ubikath
  */
-public class ControllerFranquiciaTest {
+public class ControllerFranquiciaTest extends Conexion {
     DAOFranquicia dao = new DAOFranquicia();
     Calendar calendar = Calendar.getInstance();
     
@@ -42,6 +48,7 @@ public class ControllerFranquiciaTest {
     
     @After
     public void tearDown() {
+        DropInfo();
     }
 
     /**
@@ -53,7 +60,7 @@ public class ControllerFranquiciaTest {
         System.out.println("crearFranquicia");
         
         Integer codigo = null;
-        String nombre = "nombre";
+        String nombre = "testFranquicia";
         String acronimo = "acronimo";
         int max = 200;
         int min = 300;
@@ -66,6 +73,17 @@ public class ControllerFranquiciaTest {
         Model.ModelFranquicias franquiciaRecibida = dao.crearFranquicia(franquiciaEnviada);
 
         assertEquals(franquiciaEnviada, franquiciaRecibida);
+    }
+    
+    public void DropInfo() {
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = null;
+            String query = "DELETE FROM franquicia WHERE Nombre_Franquicia='testFranquicia'";
+            st.executeUpdate(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(ControllerTipoTarjetaTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
