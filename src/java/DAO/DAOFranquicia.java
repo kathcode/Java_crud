@@ -65,7 +65,7 @@ public class DAOFranquicia extends Conexion {
             ResultSet rs = null;
             String sql = "SELECT * FROM franquicia ORDER BY Codigo_Franquicia DESC LIMIT 1";
             rs = st.executeQuery(sql);
-            
+
             if (rs.next()) {
                 Integer codigo_franquicia = rs.getInt("CODIGO_FRANQUICIA");
                 String nombre = rs.getString("NOMBRE_FRANQUICIA");

@@ -99,7 +99,6 @@
                                             out.print("<input type='text' class='form-control' id='max' name='max' placeholder='Ranfo máximo' onkeypress='return isNumberKey(event)'>");
                                         }
                                     %>
-
                                 </div>
                                 
                                 <div id="text-error" class="text-error"></div>
