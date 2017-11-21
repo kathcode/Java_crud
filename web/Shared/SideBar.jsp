@@ -58,7 +58,7 @@
                             <li><a href="/PPI-Proyecto-Bato/Franquicia/listarFranquicia.jsp">Lista franquicias</a></li>
                         </ul>
                     </li>
-                    <li><a><i class="fa fa-credit-card-alt"></i>Tipo tarjeta <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-credit-card-alt" id="TipoTarjeta"></i>Tipo tarjeta <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="/PPI-Proyecto-Bato/Tarjeta/Crear.jsp" id="NuevaTarjeta">Nuevo tipo tarjeta</a></li>
                             <li><a href="/PPI-Proyecto-Bato/Tarjeta/Lista.jsp" id="ListaTarjeta">Lista tipo tarjetas</a></li>

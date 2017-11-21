@@ -196,4 +196,18 @@ public class DAOTipoTarjeta extends Conexion{
         
     }
     
+    public void DeleteTarjeta(int Codigo_TipoTarjeta) throws SQLException
+    {
+        try 
+        {
+            String query = "DELETE FROM tipo_tarjeta WHERE Codigo_TipoTarjeta =?";
+            PreparedStatement preparedStmt = (PreparedStatement) con.prepareStatement(query);
+            preparedStmt.setInt(1, Codigo_TipoTarjeta);
+            preparedStmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }     
+    }
+    
 }
