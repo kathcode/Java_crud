@@ -52,13 +52,13 @@ public class CrearTipoTarjetaTest {
                 TextBox = driver.findElement(By.id("Codigo_Franquicia"));
         TextBox.sendKeys("American exprex");
         TextBox = driver.findElement(By.id("Codigo_TipoTarjeta"));
-        TextBox.sendKeys("40");
+        TextBox.sendKeys("1500");
         TextBox = driver.findElement(By.id("Nombre_TipoTarjeta"));
         TextBox.sendKeys("Master Azul");
         TextBox = driver.findElement(By.id("Acronimo_TipoTarjeta"));
         TextBox.sendKeys("MA");
         TextBox = driver.findElement(By.id("Interes_TipoTarjeta"));
-        TextBox.sendKeys("0,06");
+        TextBox.sendKeys("0.06");
         TextBox = driver.findElement(By.id("PlazoMax_TipoTarjeta"));
         TextBox.sendKeys("40");
         TextBox = driver.findElement(By.id("CupoMax_TipoTarjeta"));
@@ -74,7 +74,7 @@ public class CrearTipoTarjetaTest {
             Logger.getLogger(CrearTipoTarjetaTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         TextBox = driver.findElement(By.id("Codigo_TipoTarjeta2"));
-        TextBox.sendKeys("40");
+        TextBox.sendKeys("1500");
          try {
             Thread.sleep(2000);
         } catch (InterruptedException ex) {
@@ -100,14 +100,14 @@ public class CrearTipoTarjetaTest {
 
     @BeforeClass
     public static void setUpClass() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Asus\\Downloads\\pruebas\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "ExternalLibs/chromedriver");
 
     }
 
     @Before
     public void setUp() {
         driver = new ChromeDriver();
-        driver.get("http://localhost:43479/PPI-Proyecto-Bato/");
+        driver.get("http://localhost:8080/PPI-Proyecto-Bato/");
     }
 
     @After

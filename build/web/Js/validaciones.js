@@ -27,7 +27,7 @@ function validacionLogin() {
 function validateTarjetaxCliente() {
     debugger
     var IdClient = $('#IdClient').val();
-    var TipoTarjeta = $('#TipoTarjeta :selected').text();
+    var TipoTarjeta = $('#ATipoTarjeta').val();
     var CTarjeta = $('#CTarjeta').val();
     
     if (IdClient == "") {
@@ -36,7 +36,7 @@ function validateTarjetaxCliente() {
         return false;
     }
     
-    if (TipoTarjeta == "Seleccionar") {
+    if (TipoTarjeta == "") {
         $("#text-error").text("*Por favor, seleccione un tipo de tarjeta.");
         $("#text-error").css("display", "block");
         return false;
@@ -262,6 +262,69 @@ function validacionBuscarPago(){
     }
     
     return true
+}
+
+
+function validationTypeT(){
+    
+    var codigoFranquicia = $("#Codigo_Franquicia").val();
+    var codigoTipoTarjeta = $("#Codigo_TipoTarjeta").val();
+    var nombre = $("#Nombre_TipoTarjeta").val();
+    var acronimo = $("#Acronimo_TipoTarjeta").val();
+    var interes = $("#Interes_TipoTarjeta").val();
+    var plazoMax = $("#PlazoMax_TipoTarjeta").val();
+    var cupoMax = $("#CupoMax_TipoTarjeta").val();
+    var multa = $("#Multa_TipoTarjeta").val();
+    
+    if (codigoFranquicia == "" || codigoFranquicia == " "){
+        $("#text-error").text("*Por favor, seleccione una franquicia.");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+    if (codigoTipoTarjeta == "" || codigoTipoTarjeta == " "){
+        $("#text-error").text("*Por favor, ingrese el codigo de la tarjeta.");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+    if (nombre == "" || nombre == " "){
+        $("#text-error").text("*Por favor, ingrese el nombre.");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+    if (acronimo == "" || acronimo == " "){
+        $("#text-error").text("*Por favor, ingrese el acrónimo.");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+    if (interes == "" || interes == " "){
+        $("#text-error").text("*Por favor, ingrese el interes.");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+    if (plazoMax == "" || plazoMax == " "){
+        $("#text-error").text("*Por favor, ingrese el plazo maxímo.");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+    if (cupoMax == "" || cupoMax == " "){
+        $("#text-error").text("*Por favor, ingrese el cupo maxímo.");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+    if (multa == "" || multa == " "){
+        $("#text-error").text("*Por favor, ingrese la multa.");
+        $("#text-error").css("display", "block");
+        return false;
+    }
+    
+    return true;
 }
 
 

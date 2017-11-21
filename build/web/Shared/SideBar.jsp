@@ -27,9 +27,9 @@
                         </ul>
                     </li>
                     
-                    <li><a><i class="fa fa-credit-card-alt"></i>Tarjetas clientes<span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-credit-card-alt" id="AsignarTarjetaCliente"></i>Tarjetas clientes<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="/PPI-Proyecto-Bato/TarjetaCliente/Asignar.jsp">Asignar tarjeta</a></li>
+                            <li><a href="/PPI-Proyecto-Bato/TarjetaCliente/Asignar.jsp" id="AsignarTarjeta">Asignar tarjeta</a></li>
                             <li><a href="/PPI-Proyecto-Bato/TarjetaCliente/Lista.jsp">Lista tarjetas clientes</a></li>
                         </ul>
                     </li>

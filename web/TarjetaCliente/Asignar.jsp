@@ -75,7 +75,7 @@
                                     
                                     <jsp:include page="../TipoTarjeta?opcion=listarTipoTarjeta" />
 
-                                    <select class="form-control" id="TipoTarjeta" name="TipoTarjeta" >
+                                    <select class="form-control" id="ATipoTarjeta" name="TipoTarjeta" >
                                         <option value="">Seleccionar</option>
 
                                         <%
