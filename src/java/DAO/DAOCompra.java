@@ -103,8 +103,6 @@ public class DAOCompra extends Conexion{
                 id = rs.getInt(1);
             }
             
-            
-            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

@@ -7,6 +7,7 @@ package Controller;
 
 import DAO.Conexion;
 import DAO.DAOFranquicia;
+import Controller.ControllerFranquicia;
 import Model.ModelFranquicias;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -62,8 +63,8 @@ public class ControllerFranquiciaTest extends Conexion {
         Integer codigo = null;
         String nombre = "testFranquicia";
         String acronimo = "acronimo";
-        int max = 200;
-        int min = 300;
+        int min = 8001;
+        int max = 9001;
         java.sql.Date fecha_creacion = new java.sql.Date(calendar.getTime().getTime());
 
         Model.ModelFranquicias franquiciaEnviada = new Model.ModelFranquicias(codigo, nombre, acronimo, max, min, fecha_creacion);
