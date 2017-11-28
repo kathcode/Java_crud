@@ -73,6 +73,10 @@ public class ControllerCompra extends HttpServlet {
             if (option.equals("proyeccion")) {
                 Proyection(request, response);
             }
+            
+            if (option.equals("consultarCuotasPagadas")) {
+                getDuesPaid(request, response);
+            }
         }
 
     }
@@ -292,6 +296,9 @@ public class ControllerCompra extends HttpServlet {
         } catch (SQLException e) {
         }
 
+    }
+    
+    private void getDuesPaid(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
 }
