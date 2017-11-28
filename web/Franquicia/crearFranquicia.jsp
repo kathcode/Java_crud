@@ -105,7 +105,7 @@
                                 
                                 <div class="ctn-btn-form">
                                     <a href="${pageContext.request.contextPath}/Franquicia/listarFranquicia.jsp" class="btn btn-default">Cancelar</a>
-                                    <button type="submit" class="btn btn-primary">Crear franquicia</button>
+                                    <button type="submit" id="botonCrearFranquicia" class="btn btn-primary">Crear franquicia</button>
                                 </div>
                             </form>
                             

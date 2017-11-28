@@ -123,7 +123,7 @@ public class ControllerFranquicia extends HttpServlet {
     }// </editor-fold>
     
     
-    protected void crearFranquicia(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException
+    protected int crearFranquicia(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException
     {
         
         try {
@@ -143,21 +143,23 @@ public class ControllerFranquicia extends HttpServlet {
                 dao.validateRango(max, min);
                 dao.crearFranquicia(franquicia);
                 response.sendRedirect(LISTA_FRANQUICIA);
+                return 1;
             
             }else{
                 
                 request.setAttribute("franquicia", franquicia);           
-                request.setAttribute("errorMessage", "El pin mínimo de la franquicia debe se mayo a " + lastFran.getRangoPingMax_Franquicia());
+                request.setAttribute("errorMessage", "El pin mínimo de la franquicia debe se mayor a " + lastFran.getRangoPingMax_Franquicia());
                 request.getRequestDispatcher(CREAR_FRANQUICIA).forward(request, response);
-            
+                return 2;
             }
             
             
             
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         
-        
+        return 0;
     }
     
     private void actualizarFranquicia(HttpServletRequest request, HttpServletResponse response) throws IOException 

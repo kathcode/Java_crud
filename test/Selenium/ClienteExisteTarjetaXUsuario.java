@@ -50,7 +50,7 @@ public class ClienteExisteTarjetaXUsuario {
         }
         TextBox = driver.findElement(By.id("IdClient"));
         TextBox.sendKeys("123");
-        TextBox = driver.findElement(By.id("yTipoTarjeta"));
+        TextBox = driver.findElement(By.id("ATipoTarjeta"));
         TextBox.sendKeys("Azul");
         TextBox = driver.findElement(By.id("CTarjeta"));
         TextBox.sendKeys("2300");
@@ -66,14 +66,14 @@ public class ClienteExisteTarjetaXUsuario {
 
     @BeforeClass
     public static void setUpClass() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Asus\\Downloads\\pruebas\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "/home/ubikath/Downloads/chromedriver");
 
     }
 
     @Before
     public void setUp() {
         driver = new ChromeDriver();
-        driver.get("http://localhost:43479/PPI-Proyecto-Bato/");
+        driver.get("http://localhost:8080/PPI-Proyecto-Bato/");
     }
 
     @After

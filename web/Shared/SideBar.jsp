@@ -52,10 +52,10 @@
             <div class="menu_section">
                 <h3>Administrador</h3>
                 <ul class="nav side-menu">
-                    <li><a><i class="fa fa-building"></i> Franquicias <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-building" id="SeleccionarFranquicia"></i> Franquicias <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="/PPI-Proyecto-Bato/Franquicia/crearFranquicia.jsp">Nueva franquicia</a></li>
-                            <li><a href="/PPI-Proyecto-Bato/Franquicia/listarFranquicia.jsp">Lista franquicias</a></li>
+                            <li><a href="/PPI-Proyecto-Bato/Franquicia/crearFranquicia.jsp" id="nuevaFranquicia">Nueva franquicia</a></li>
+                            <li><a href="/PPI-Proyecto-Bato/Franquicia/listarFranquicia.jsp" id="listarFranquicia">Lista franquicias</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-credit-card-alt" id="TipoTarjeta"></i>Tipo tarjeta <span class="fa fa-chevron-down"></span></a>
