@@ -82,7 +82,7 @@
                                             out.println("<td>" + c.getDeudaInicial_Compra() + "</td>");
                                             out.println("<td>" + c.getDeudaActual_Compra() + "</td>");
                                             out.println("<td>" + c.getInteres_Compra()  + "</td>");
-                                            out.println("<td><a href= '../Compra?opcion=consultarCuotasPagadas&idCompra=" + c.getId_Compra()  + "'> <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Ver cuotas pagadas   </a>   </td>");
+                                            out.println("<td><a href= '../Compra?opcion=consultarCuotasPagadas&idCompra=" + c.getId_Compra()  + "'> <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Ver pagos realizados   </a>   </td>");
                                             out.println("<td><a href= '../Compra?opcion=proyeccion&idCompra=" + c.getId_Compra()  + "'> <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Proyección </a>   </td>");
                                             out.println("</tr>");
                                         }

@@ -110,4 +110,27 @@ public class DAOCompra extends Conexion{
         return id;
     }
     
+    public List<Model.ModelgetDuesPaid> getDuesPaid(int id_compra) throws SQLException {
+        List<Model.ModelgetDuesPaid> listaPagosRealizados = new LinkedList<>();
+        
+        Statement st = con.createStatement();
+        ResultSet rs = null;
+        String sql = "SELECT * FROM programacion_pagos where id_compra=" + id_compra + " and Estado_Pago=0";
+        rs = st.executeQuery(sql);
+        
+        while (rs.next()) {
+            int id_pago = rs.getInt("id_pago");
+            Date fecha_pago = rs.getDate("Fecha_de_Pago");
+            int estado_pago = rs.getInt("Estado_Pago");
+            int id_compra1 = rs.getInt("Id_Compra");
+            Date fecha_realizado = rs.getDate("Fecha_Realizado");
+            int valor_cuota = rs.getInt("Valor_Cuota");
+
+            Model.ModelgetDuesPaid pago = new Model.ModelgetDuesPaid(id_pago, fecha_pago, estado_pago, id_compra1, fecha_realizado, valor_cuota);
+            listaPagosRealizados.add(pago);
+        }
+        
+        return listaPagosRealizados;
+    }
+    
 }
