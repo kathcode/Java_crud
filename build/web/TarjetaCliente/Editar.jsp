@@ -1,19 +1,19 @@
 <%-- 
-    Document   : AsignarTarjeta
-    Created on : 15/11/2017, 01:34:32 PM
-    Author     : esneider.serna
+    Document   : Editar
+    Created on : Nov 19, 2017, 11:02:05 AM
+    Author     : esneiderserna
 --%>
 
-<%@page import="Model.ModelTarjetaXCliente"%>
 <%@page import="Model.ModelTipoTarjeta"%>
 <%@page import="java.util.List"%>
+<%@page import="Model.ModelTarjetaXCliente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Asignar tarjeta</title>
+        <title>Editar tarjeta de cliente</title>
         <link href="${pageContext.request.contextPath}/Lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>        
         <link href="${pageContext.request.contextPath}/Lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <link href="${pageContext.request.contextPath}/Css/custom.min.css" rel="stylesheet" type="text/css"/>
@@ -30,7 +30,7 @@
                 <div class="right_col" role="main">
 
                     <div class="page-header">
-                        <h1>Asignar tarjeta</h1>
+                        <h1>Editar tarjeta de cliente</h1>
                     </div>
 
                     <div class="panel panel-default">
@@ -53,19 +53,14 @@
                             </div>
 
 
-                            <form action="${pageContext.request.contextPath}/TarjetaXCliente" onsubmit="return validateTarjetaxCliente()"  method="post">
+                            <form action="${pageContext.request.contextPath}/TarjetaXCliente"  method="post">
 
 
                                 <div class="form-group">
                                     <label for="formUsuario">Identificación del cliente*</label>
                                     
                                     <% 
-                                        if(model != null){
-                                            out.print("<input type='text' class='form-control' id='IdClient' name='IdClient' value='" + model.getId_Usuario() + "' placeholder='Identificación'>");
-                                        }else{
-                                            out.print("<input type='text' class='form-control' id='IdClient' name='IdClient' placeholder='Identificación'>");
-                                        }
-                                    
+                                        out.print("<input type='text' class='form-control' id='IdClient' name='IdClient' placeholder='Identificación'>");                                   
                                     %>
                                     
                                 </div>
@@ -75,23 +70,18 @@
                                     
                                     <jsp:include page="../TipoTarjeta?opcion=listarTipoTarjeta" />
 
-                                    <select class="form-control" id="ATipoTarjeta" name="TipoTarjeta" >
-                                        <option value="">Seleccionar</option>
-
                                         <%
                                             List<ModelTipoTarjeta> listTipo = (List<ModelTipoTarjeta>) request.getAttribute("listTipoTarjeta");
                                             for (ModelTipoTarjeta tipo : listTipo) {
                                                 
-                                                if(model != null){
-                                                    out.println("<option value='" + tipo.getCodigo_TipoTarjeta() + "' selected>" + tipo.getAcronimo_Franquicia() + " - " + tipo.getAcronimo_TipoTarjeta() + "</option>");
-                                                }else{
-                                                    out.println("<option value='" + tipo.getCodigo_TipoTarjeta() + "' >" + tipo.getAcronimo_Franquicia() + " - " + tipo.getAcronimo_TipoTarjeta() + "</option>");
+                                                if(tipo.getCodigo_TipoTarjeta() == model.getCodigo_TipoTarjeta()){
+                                                    out.print("<input type='text' class='form-control' id='' name='' placeholder='Tipo tarjeta'>"); 
+                                                    out.print("<input type='text' class='form-control' id='TipoTarjeta' name=''TipoTarjeta value='" + tipo.getCodigo_TipoTarjeta() + "'>"); 
                                                 }
                                               
                                             }
 
                                         %>            
-                                    </select>
                                 </div>
 
                                 
@@ -99,12 +89,7 @@
                                     <label for="formUsuario">Cupo de la tarjeta*</label>
                                     
                                     <% 
-                                        if(model != null){
-                                            out.print("<input type='number' class='form-control' id='CTarjeta' name='CTarjeta' value='" + String.format("%.0f", model.getCupo_TarjetaXCliente()) + "' placeholder='Cupo de la tarjeta'>");
-                                        }else{
-                                            out.print("<input type='number' class='form-control' id='CTarjeta' name='CTarjeta' placeholder='Cupo de la tarjeta'>");
-                                        }
-                                    
+                                        out.print("<input type='text' class='form-control' id='CTarjeta' name='CTarjeta' value='" + String.format("%.0f", model.getCupo_TarjetaXCliente()) + "' placeholder='Cupo de la tarjeta'>");
                                     %>
 
                                 </div>
@@ -114,10 +99,9 @@
 
                                 <div class="ctn-btn-form">
                                     <a href="Lista.jsp" class="btn btn-default">Cancelar</a>
-                                    <button type="submit" id="CrearTarjetaxuser" name="create" class="btn btn-primary">Asignar tarjeta</button>
+                                    <button type="submit" name="create" class="btn btn-primary">Asignar tarjeta</button>
                                 </div>
                             </form>
-                            <div id="text-error" class="text-error"></div>
                         </div>
                     </div>
                 </div>
@@ -129,7 +113,6 @@
     <script src="${pageContext.request.contextPath}/Js/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/Lib/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>    
     <script src="${pageContext.request.contextPath}/Js/custom.min.js" type="text/javascript"></script>
-    <script src="${pageContext.request.contextPath}/Js/validaciones.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/Js/validaciones.js" type="text/javascript"></script>
 
 </html>

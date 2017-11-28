@@ -114,7 +114,7 @@
 
                                 <div class="ctn-btn-form">
                                     <a href="Lista.jsp" class="btn btn-default">Cancelar</a>
-                                    <button type="submit" name="create" class="btn btn-primary">Asignar tarjeta</button>
+                                    <button type="submit" id="CrearTarjetaxuser" name="create" class="btn btn-primary">Asignar tarjeta</button>
                                 </div>
                             </form>
                             <div id="text-error" class="text-error"></div>
