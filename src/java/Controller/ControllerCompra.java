@@ -42,6 +42,7 @@ public class ControllerCompra extends HttpServlet {
     private final String VIEW_LISTA = "Compra/Lista.jsp";
     private final String VIEW_PROYECCION = "Compra/Proyeccion.jsp";
     private final String VIEW_CREAR = "Compra/Crear.jsp";
+    private final String VIEW_RESULTADO = "Compra/Resultado.jsp";
     private DecimalFormat twoDForm = new DecimalFormat("#.00");
     NumberFormat nf = NumberFormat.getInstance();
     private ModelCompra shopping;
@@ -64,6 +65,11 @@ public class ControllerCompra extends HttpServlet {
         if (option == null) {
             if (request.getParameter("create") != null) {
                 CreateShopping(request, response);
+            }
+            
+            if(request.getParameter("search") != null)
+            {
+                SearchShoppingByIdUser(request, response);
             }
 
         } else {
@@ -314,6 +320,22 @@ public class ControllerCompra extends HttpServlet {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private void SearchShoppingByIdUser(HttpServletRequest request, HttpServletResponse response) {
+        
+        try {
+            
+            List<ModelCompra> listShoppings = DAO.SearchShoppingByIdUser(request.getParameter("IdUsuario"));
+            request.setAttribute("listShoppings", listShoppings);
+
+            RequestDispatcher vista;
+            vista = request.getRequestDispatcher(VIEW_RESULTADO);
+            vista.forward(request, response);
+            
+        } catch (Exception e) {
+        }
+    
     }
 
 }

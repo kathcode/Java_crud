@@ -1,6 +1,6 @@
-    <%-- 
-    Document   : Listar
-    Created on : Oct 17, 2017, 7:04:42 PM
+<%-- 
+    Document   : Resultado
+    Created on : Nov 28, 2017, 1:38:21 PM
     Author     : esneiderserna
 --%>
 
@@ -12,7 +12,7 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lista de usuarios</title>
+        <title>Lista de compras por usuario</title>
         <link href="${pageContext.request.contextPath}/Lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>        
         <link href="${pageContext.request.contextPath}/Lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <link href="${pageContext.request.contextPath}/Css/custom.min.css" rel="stylesheet" type="text/css"/>        
@@ -32,7 +32,7 @@
                 <div class="right_col" role="main">
 
                     <div class="page-header">
-                        <h1>Lista de Compras</h1>
+                        <h1>Compras por usuario</h1>
                     </div>
 
                     <div class="panel panel-default">
@@ -41,7 +41,7 @@
                                 <label>Buscar compras de un cliente</label>
                             </div>
                             <div class="col-lg-6">
-                                <form action="../Compra" method="post">
+                                <form action="${pageContext.request.contextPath}/Compra" method="post">
                                     <div class="input-group">
                                         
                                         <input type="text" class="form-control" name="IdUsuario" placeholder="Cédula cliente">
@@ -75,9 +75,6 @@
                                 </thead> 
                                 <tbody> 
 
-                                    <jsp:include page="../Compra?opcion=listarCompras" />
-
-
                                     <%
                                         // Se recupera la variable de session listaUsuario
                                         List<ModelCompra> listShoppings = (List<ModelCompra>) request.getAttribute("listShoppings");
@@ -90,8 +87,7 @@
                                             out.println("<td>" + c.getDeudaInicial_Compra() + "</td>");
                                             out.println("<td>" + c.getDeudaActual_Compra() + "</td>");
                                             out.println("<td>" + c.getInteres_Compra()  + "</td>");
-                                            out.println("<td><a href= '../Compra?opcion=consultarCuotasPagadas&idCompra=" + c.getId_Compra()  + "'> <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Ver pagos realizados   </a>   </td>");
-                                            out.println("<td><a href= '../Compra?opcion=proyeccion&idCompra=" + c.getId_Compra()  + "'> <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Proyección </a>   </td>");
+                                            out.println("<td><a href= 'Compra?opcion=proyeccion&idCompra=" + c.getId_Compra()  + "'> <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Proyección </a>   </td>");
                                             out.println("</tr>");
                                         }
                                     %>

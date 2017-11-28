@@ -19,6 +19,7 @@ public class ModelCompra {
     private String Numero_TarjetaXCliente;
     
     private String Id_Usuario;
+    private String Nombre_Cliente;
 
     public ModelCompra() {
     }
@@ -105,5 +106,17 @@ public class ModelCompra {
     public void setId_Usuario(String Id_Usuario) {
         this.Id_Usuario = Id_Usuario;
     }
+
+    public String getNombre_Cliente() {
+        return Nombre_Cliente;
+    }
+
+    public void setNombre_Cliente(String Nombre_Cliente) {
+        this.Nombre_Cliente = Nombre_Cliente;
+    }
+
+    
+    
+    
     
 }
