@@ -1,4 +1,4 @@
-<%-- 
+    <%-- 
     Document   : Listar
     Created on : Oct 17, 2017, 7:04:42 PM
     Author     : esneiderserna
@@ -37,16 +37,20 @@
 
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <!--<div class="col-lg-6">
-                                <form action="../Usuario" method="post">
+                            <div class="col-sm-12">
+                                <label>Buscar compras de un cliente</label>
+                            </div>
+                            <div class="col-lg-6">
+                                <form action="../Compra" method="post">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="IdUsuario" placeholder="Compra">
+                                        
+                                        <input type="text" class="form-control" name="IdUsuario" placeholder="Cédula cliente">
                                         <span class="input-group-btn">
                                             <button class="btn btn-default" type="submit" name="search">Buscar</button>
                                         </span>
                                     </div>
                                 </form>
-                            </div>-->
+                            </div>
 
                             <div class="col-md-6 pull-right">
                                 <a href="Crear.jsp" class="btn btn-primary pull-right">Crear compra</a>
@@ -58,7 +62,9 @@
                         <div class="panel-body">
                             <table class="table table-hover"> 
                                 <thead> 
-                                    <tr> 
+                                    <tr>
+                                        <th>Id cliente</th>
+                                        <th>Nombre cliente</th>
                                         <th>Descripción</th> 
                                         <th>Fecha</th> 
                                         <th>Valor Compra</th> 
@@ -77,6 +83,8 @@
                                         List<ModelCompra> listShoppings = (List<ModelCompra>) request.getAttribute("listShoppings");
                                         for (ModelCompra c : listShoppings) {
                                             out.println("<tr>");
+                                            out.println("<td>" + c.getId_Usuario()+ "</td>");
+                                            out.println("<td>" + c.getNombre_Cliente() + "</td>");
                                             out.println("<td>" + c.getDescripcion_Compra() + "</td>");
                                             out.println("<td>" + c.getFecha_Compra() + "</td>");
                                             out.println("<td>" + c.getDeudaInicial_Compra() + "</td>");
