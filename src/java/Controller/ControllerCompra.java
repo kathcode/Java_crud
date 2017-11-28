@@ -15,6 +15,7 @@ import Model.ModelPago;
 import Model.ModelProyeccion;
 import Model.ModelTarjetaXCliente;
 import Model.ModelTipoTarjeta;
+import Model.ModelgetDuesPaid;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -78,6 +79,11 @@ public class ControllerCompra extends HttpServlet {
 
             if (option.equals("proyeccion")) {
                 Proyection(request, response);
+            }
+            
+            if (option.equals("consultarCuotasPagadas")) {
+                int id_compra = Integer.parseInt(request.getParameter("idCompra"));
+                getDuesPaid(request, response, id_compra);
             }
         }
 
@@ -296,8 +302,24 @@ public class ControllerCompra extends HttpServlet {
             }
 
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
 
+    }
+    
+    private void getDuesPaid(HttpServletRequest request, HttpServletResponse response, int id_compra) throws ServletException, IOException {
+        try {
+            DAOCompra compra = new DAOCompra();
+            RequestDispatcher vista = null;
+            
+            request.setAttribute("listPays", compra.getDuesPaid(id_compra));
+
+            vista = request.getRequestDispatcher("Compra/listarPagosRealizados.jsp");
+            vista.forward(request, response);
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void SearchShoppingByIdUser(HttpServletRequest request, HttpServletResponse response) {
