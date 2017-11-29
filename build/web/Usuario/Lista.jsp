@@ -32,7 +32,7 @@
                 <div class="right_col" role="main">
 
                     <div class="page-header">
-                        <h1>Lista de clientes</h1>
+                        <h1 id="listado_clientes">Lista de clientes</h1>
                     </div>
 
                     <div class="panel panel-default">

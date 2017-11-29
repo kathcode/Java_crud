@@ -9,29 +9,63 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AsignarCupoTarjetaCliente {
     public static WebDriver driver = null;
+    
+    @BeforeClass
+    public static void setUpClass() {
+        System.setProperty("webdriver.chrome.driver", "/home/ubikath/Downloads/chromedriver");
 
+    }
+
+    @Before
+    public void setUp() {
+        driver = new ChromeDriver();
+        driver.get("http://localhost:8080/PPI-Proyecto-Bato/");
+    }
+
+    @After
+    public void tearDown() {
+        driver.quit();
+    }
+    
+    // Variables del login
+    By inputUsuario = By.id("usuario");
+    By inputPassword = By.id("password");
+    By botonEntrar = By.id("submit");
+    
+    
+    // Funcio para el login
+    public void login() {
+        driver.findElement(inputUsuario).sendKeys("esneider.serna");
+        driver.findElement(inputPassword).sendKeys("12345678");
+        driver.findElement(botonEntrar).click();
+        
+        By tituloDespuesLogin = By.id("listado_clientes");
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(tituloDespuesLogin));
+       
+        String title = driver.findElement(tituloDespuesLogin).getText();
+        Assert.assertTrue(title.contains("Lista de clientes"));
+    }
+
+    @Test
+    public void Login() {
+        login();
+    }
+    
     @Test
     public void CrearTarjetaPruebasFuncionales() {
         WebDriverWait wait = new WebDriverWait(driver, 3);
         WebElement TextBox;
-        TextBox = driver.findElement(By.id("usuario"));
-        TextBox.sendKeys("esneider.serna");
-        TextBox = driver.findElement(By.id("password"));
-        TextBox.sendKeys("12345678");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("submit")));
-        WebElement link = driver.findElement(By.id("submit"));
-        link.click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(CrearTipoTarjetaTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        login();
+        
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("AsignarTarjetaCliente")));
         WebElement link2 = driver.findElement(By.id("AsignarTarjetaCliente"));
         link2.click();
@@ -62,22 +96,5 @@ public class AsignarCupoTarjetaCliente {
         } catch (InterruptedException ex) {
             Logger.getLogger(CrearTipoTarjetaTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Asus\\Downloads\\pruebas\\chromedriver.exe");
-
-    }
-
-    @Before
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.get("http://localhost:43479/PPI-Proyecto-Bato/");
-    }
-
-    @After
-    public void tearDown() {
-        driver.quit();
     }
 }

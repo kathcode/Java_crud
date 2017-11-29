@@ -49,7 +49,7 @@ public class DAOTarjetaXCliente extends Conexion{
         ResultSet rs = null;
         String query = "SELECT Numero_TarjetaXCliente, Cupo_TarjetaXCliente, CupoDisp_TarjetaXCliente, TC.Id_Usuario, TC.Codigo_TipoTarjeta, TC.Fecha_Creacion," 
                         +" Nombre_Usuario, Apellidos_Usuario, Nombre_TipoTarjeta " 
-                        +"FROM usuario U INNER JOIN Tarjeta_X_Cliente TC ON U.Id_Usuario = TC.Id_Usuario "
+                        +"FROM usuario U INNER JOIN tarjeta_x_cliente TC ON U.Id_Usuario = TC.Id_Usuario "
                         +"INNER JOIN Tipo_Tarjeta TT ON TC.Codigo_TipoTarjeta = TT.Codigo_TipoTarjeta";
         rs = st.executeQuery(query);
         
@@ -76,7 +76,7 @@ public class DAOTarjetaXCliente extends Conexion{
         ResultSet rs = null;
         String query = "SELECT Numero_TarjetaXCliente, Cupo_TarjetaXCliente, CupoDisp_TarjetaXCliente, TC.Id_Usuario, TC.Codigo_TipoTarjeta, TC.Fecha_Creacion," 
                         +" Nombre_Usuario, Apellidos_Usuario, Nombre_TipoTarjeta, Interes_TipoTarjeta " 
-                        +"FROM usuario U INNER JOIN Tarjeta_X_Cliente TC ON U.Id_Usuario = TC.Id_Usuario "
+                        +"FROM usuario U INNER JOIN tarjeta_x_cliente TC ON U.Id_Usuario = TC.Id_Usuario "
                         +"INNER JOIN Tipo_Tarjeta TT ON TC.Codigo_TipoTarjeta = TT.Codigo_TipoTarjeta "
                         +"WHERE Numero_TarjetaXCliente = " + nTarjeta;
         

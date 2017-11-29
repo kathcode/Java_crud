@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/src/java/Controller/ControllerFranquicia.java</file>
-            <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/src/java/Model/ModelgetDuesPaid.java</file>
-            <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/src/java/Controller/ControllerCompra.java</file>
-            <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/src/java/DAO/DAOCompra.java</file>
-            <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/web/Compra/listarPagosRealizados.jsp</file>
+            <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/src/java/DAO/DAOTipoTarjeta.java</file>
+            <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/src/java/DAO/DAOLogin.java</file>
+            <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/test/Selenium/AsignarCupoTarjetaCliente.java</file>
+            <file>file:/home/ubikath/Downloads/__r/PPI-Proyecto-Bato/src/java/DAO/DAOTarjetaXCliente.java</file>
         </group>
     </open-files>
 </project-private>
