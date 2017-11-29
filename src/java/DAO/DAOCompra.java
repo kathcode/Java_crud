@@ -21,12 +21,41 @@ import java.util.List;
  */
 public class DAOCompra extends Conexion{
     
+//    public List<ModelCompra> ListShopping () throws SQLException
+//    {
+//        List<ModelCompra> list = new LinkedList<>();
+//        Statement st = con.createStatement();
+//        ResultSet rs = null;
+//        String query = "Select * FROM compras";
+//        rs = st.executeQuery(query);
+//        
+//        while (rs.next()){
+//            ModelCompra m = new ModelCompra();
+//            m.setId_Compra(rs.getInt("Id_Compra")); 
+//            m.setFecha_Compra(rs.getDate("Fecha_Compra"));
+//            m.setDeudaInicial_Compra(rs.getInt("DeudaInicial_Compra"));
+//            m.setNumeroCuotas_Compra(rs.getInt("NumeroCuotas_Compra"));
+//            m.setDescripcion_Compra(rs.getString("Descripcion_Compra"));
+//            m.setInteres_Compra(rs.getDouble("Interes_Compra"));
+//            m.setDeudaActual_Compra(rs.getInt("DeudaActual_Compra"));
+//            
+//            list.add(m);
+//        }
+//        
+//        return list;
+//    }
+    
+    
     public List<ModelCompra> ListShopping () throws SQLException
     {
         List<ModelCompra> list = new LinkedList<>();
         Statement st = con.createStatement();
         ResultSet rs = null;
-        String query = "Select * FROM compras";
+        String query = "Select Id_Compra, Fecha_Compra, DeudaInicial_Compra, NumeroCuotas_Compra, Descripcion_Compra, "
+                + "Interes_Compra, DeudaActual_Compra, CO.Numero_TarjetaXCliente, U.Id_Usuario, U.Nombre_Usuario, U.Apellidos_Usuario "
+                + "FROM compras CO "
+                + "INNER JOIN tarjeta_x_cliente TC ON CO.Numero_TarjetaXCliente = TC.Numero_TarjetaXCliente "
+                + "INNER JOIN usuario U ON TC.Id_Usuario = U.Id_Usuario";
         rs = st.executeQuery(query);
         
         while (rs.next()){
@@ -38,12 +67,16 @@ public class DAOCompra extends Conexion{
             m.setDescripcion_Compra(rs.getString("Descripcion_Compra"));
             m.setInteres_Compra(rs.getDouble("Interes_Compra"));
             m.setDeudaActual_Compra(rs.getInt("DeudaActual_Compra"));
+            m.setId_Usuario(rs.getString("Id_Usuario"));
+            m.setNombre_Cliente(rs.getString("Nombre_Usuario") + " " + rs.getString("Apellidos_Usuario"));
             
             list.add(m);
         }
         
         return list;
     }
+    
+    
     
     public ModelCompra DetailShopping(int idCompra) throws SQLException 
     {
@@ -110,6 +143,38 @@ public class DAOCompra extends Conexion{
         return id;
     }
     
+
+    public List<ModelCompra> SearchShoppingByIdUser (String idUser) throws SQLException
+    {
+        List<ModelCompra> list = new LinkedList<>();
+        Statement st = con.createStatement();
+        ResultSet rs = null;
+        String query = "Select Id_Compra, Fecha_Compra, DeudaInicial_Compra, NumeroCuotas_Compra, Descripcion_Compra, "
+                + "Interes_Compra, DeudaActual_Compra, CO.Numero_TarjetaXCliente, U.Id_Usuario, U.Nombre_Usuario, U.Apellidos_Usuario "
+                + "FROM compras CO "
+                + "INNER JOIN tarjeta_x_cliente TC ON CO.Numero_TarjetaXCliente = TC.Numero_TarjetaXCliente "
+                + "INNER JOIN usuario U ON TC.Id_Usuario = U.Id_Usuario "
+                + "WHERE U.Id_Usuario = " + idUser;
+        rs = st.executeQuery(query);
+        
+        while (rs.next()){
+            ModelCompra m = new ModelCompra();
+            m.setId_Compra(rs.getInt("Id_Compra")); 
+            m.setFecha_Compra(rs.getDate("Fecha_Compra"));
+            m.setDeudaInicial_Compra(rs.getInt("DeudaInicial_Compra"));
+            m.setNumeroCuotas_Compra(rs.getInt("NumeroCuotas_Compra"));
+            m.setDescripcion_Compra(rs.getString("Descripcion_Compra"));
+            m.setInteres_Compra(rs.getDouble("Interes_Compra"));
+            m.setDeudaActual_Compra(rs.getInt("DeudaActual_Compra"));
+            m.setId_Usuario(rs.getString("Id_Usuario"));
+            m.setNombre_Cliente(rs.getString("Nombre_Usuario") + " " + rs.getString("Apellidos_Usuario"));
+            
+            list.add(m);
+        }
+        
+        return list;
+    }
+
     public List<Model.ModelgetDuesPaid> getDuesPaid(int id_compra) throws SQLException {
         List<Model.ModelgetDuesPaid> listaPagosRealizados = new LinkedList<>();
         
@@ -131,6 +196,7 @@ public class DAOCompra extends Conexion{
         }
         
         return listaPagosRealizados;
+
     }
     
 }
