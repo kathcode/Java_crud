@@ -115,7 +115,7 @@ public class DAOCompra extends Conexion{
         
         Statement st = con.createStatement();
         ResultSet rs = null;
-        String sql = "SELECT * FROM programacion_pagos where id_compra=" + id_compra + " and Estado_Pago=0";
+        String sql = "SELECT * FROM programacion_pagos where id_compra=" + id_compra + " and Estado_Pago=1";
         rs = st.executeQuery(sql);
         
         while (rs.next()) {

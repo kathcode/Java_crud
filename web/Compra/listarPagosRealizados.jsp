@@ -34,31 +34,34 @@
                             <table class="table table-hover"> 
                                 <thead> 
                                     <tr> 
-                                        <th>Id de pago</th> 
+                                        <th>Id de pago.</th> 
                                         <th>Fecha de pago</th> 
                                         <th>Id de compra</th> 
                                         <th>Valor cuota</th> 
                                         <th>Fecha de pago realizado</th>
                                     </tr> 
-                                </thead> 
-                                <tbody> 
-
+                                </thead>
+                                <tbody>
                                     <jsp:include page="../Compra?opcion=listPays" />
-
 
                                     <%
                                         // Se recupera la variable de session listaUsuario
-                                        List<ModelgetDuesPaid> listPays = (List<ModelgetDuesPaid>) request.getAttribute("listShoppings");
-                                        for (ModelgetDuesPaid c : listPays) {
-                                            out.println("<tr>");
-                                            out.println("<td>" + c.getId_pago() + "</td>");
-                                            out.println("<td>" + c.getFecha_pago() + "</td>");
-                                            out.println("<td>" + c.getId_compra() + "</td>");
-                                            out.println("<td>" + c.getValor_cuota() + "</td>");
-                                            out.println("</tr>");
+                                        List<ModelgetDuesPaid> listPays = (List<ModelgetDuesPaid>) request.getAttribute("listPays");
+                                        
+                                        if (listPays.size() > 0) {
+                                            for (ModelgetDuesPaid c : listPays) {
+                                                out.println("<tr>");
+                                                out.println("<td>" + c.getId_pago() + "</td>");
+                                                out.println("<td>" + c.getFecha_pago() + "</td>");
+                                                out.println("<td>" + c.getId_compra() + "</td>");
+                                                out.println("<td>" + c.getValor_cuota() + "</td>");
+                                                out.println("<td>" + c.getFecha_realizado() + "</td>");
+                                                out.println("</tr>");
+                                            }
+                                        } else {
+                                            out.println("<h1 class='text-center'>Esta compra no tiene pagos realizados </h1>");
                                         }
                                     %>
-
                                 </tbody> 
                             </table>
                         </div>
